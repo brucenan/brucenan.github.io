@@ -1,0 +1,450 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Process Mining学习笔记（一） | 面子与里子</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="课程名称是 《Process Mining： Data Science in Action》，以下是课后笔记整理。
+Date Science and Big Data当今的时代，海量数据不断地产生，在过去的10分钟产生的数据量，都超过了2003年之前人类历史上产生的所有数据。人类的各种活动，都会不断地产生一系列的event data（事件数据）。人类的事件数据形成了一个网，即Internet of">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Process Mining学习笔记（一）">
+<meta property="og:url" content="http://brucenan.github.io/2014/12/25/process1/index.html">
+<meta property="og:site_name" content="面子与里子">
+<meta property="og:description" content="课程名称是 《Process Mining： Data Science in Action》，以下是课后笔记整理。
+Date Science and Big Data当今的时代，海量数据不断地产生，在过去的10分钟产生的数据量，都超过了2003年之前人类历史上产生的所有数据。人类的各种活动，都会不断地产生一系列的event data（事件数据）。人类的事件数据形成了一个网，即Internet of">
+<meta property="og:image" content="http://brucenan.qiniudn.com/pm-4v.png">
+<meta property="og:image" content="http://brucenan.qiniudn.com/pm-focus.png">
+<meta property="og:image" content="http://brucenan.qiniudn.com/pm-ppp.png">
+<meta property="og:image" content="http://brucenan.qiniudn.com/pm-overview.png">
+<meta property="og:image" content="http://brucenan.qiniudn.com/pm-position.png">
+<meta property="og:image" content="http://brucenan.qiniudn.com/pm-dtexample.png">
+<meta property="og:image" content="http://brucenan.qiniudn.com/pm-dtstep.png">
+<meta property="og:image" content="http://brucenan.qiniudn.com/pm-entropy.png">
+<meta property="og:image" content="http://brucenan.qiniudn.com/pm-gainentropy.png">
+<meta property="og:image" content="http://brucenan.qiniudn.com/pm-support.png">
+<meta property="og:image" content="http://brucenan.qiniudn.com/pm-confidence.png">
+<meta property="og:image" content="http://brucenan.qiniudn.com/pm-lift.png">
+<meta property="og:updated_time" content="2015-12-03T02:38:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Process Mining学习笔记（一）">
+<meta name="twitter:description" content="课程名称是 《Process Mining： Data Science in Action》，以下是课后笔记整理。
+Date Science and Big Data当今的时代，海量数据不断地产生，在过去的10分钟产生的数据量，都超过了2003年之前人类历史上产生的所有数据。人类的各种活动，都会不断地产生一系列的event data（事件数据）。人类的事件数据形成了一个网，即Internet of">
+  
+    <link rel="alternative" href="/atom.xml" title="面子与里子" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?4f112a362ed49641c5089f2614a903e1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">面子与里子</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="brucenan.github.io">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-process1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/12/25/process1/" class="article-date">
+  <time datetime="2014-12-25T15:10:04.000Z" itemprop="datePublished">2014-12-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/过程挖掘/">过程挖掘</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Process Mining学习笔记（一）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>课程名称是 《Process Mining： Data Science in Action》，以下是课后笔记整理。</p>
+<h1 id="Date_Science_and_Big_Data">Date Science and Big Data</h1><p>当今的时代，海量数据不断地产生，在过去的10分钟产生的数据量，都超过了2003年之前人类历史上产生的所有数据。人类的各种活动，都会不断地产生一系列的event data（事件数据）。人类的事件数据形成了一个网，即Internet of Events。它的数据主要有4种来源：<br><a id="more"></a></p>
+<ol>
+<li>Internet of content 如web 页面数据</li>
+<li>Internet of People 社交网络上人们通过各种关系产生</li>
+<li>Internet of Things 物联网</li>
+<li>Internet of Places 地理位置信息</li>
+</ol>
+<p>由数据的指数级增长，又谈到了摩尔定律（Moore’s Law）,每两年芯片中晶体管的数量将翻一翻，在过去的40年间，数量增长了2^20=1048576。这种增长是非常惊人的。40年前从 Amsterdam 到 Newyork 要坐7小时的飞机，如果飞机的飞行速度发展也能遵照摩尔定律，那么40年后只需0.024秒（可惜并没有如此高速发展）……</p>
+<p>如今，我们关注的不是如何生成数据，而是如何从海量数据中发现有价值的内容。</p>
+<h1 id="4Vs">4Vs</h1><p>大数据领域，我们经常会关注的4个V：<br><img src="http://brucenan.qiniudn.com/pm-4v.png" alt="大数据的4V"></p>
+<ol>
+<li>Volume（容量）：海量数据</li>
+<li>Velocity（速度）：数据在不断的变化</li>
+<li>Variety（多样）：数据的多样性，文本，图象，音视频等</li>
+<li>Veracity（真实）：数据的真实性</li>
+</ol>
+<p>数据科学领域，我们会提出以下的4个问题：</p>
+<ol>
+<li>What happened？ 过去发生了什么？</li>
+<li>Why did it happend？为什么会发生？</li>
+<li>What will happen？ 将会发生什么？（做预测Prediction）</li>
+<li>What is the best that can happend？ 如何更好的发生？</li>
+</ol>
+<p>这门课程集中在基于过程process的数据，利用 event data，来改进过程。<br><img src="http://brucenan.qiniudn.com/pm-focus.png" alt="课程集中的领域"></p>
+<h1 id="Different_types_of_process_mining">Different types of process mining</h1><p>Process Mining集中在关注performance-oriented problems和compliance-oriented problems。</p>
+<p>Event data 是 process mining 的入口，什么是 event data 呢？<br>一系列的日志信息，均可以称为 event data，比如学生的所有成绩单、订单的记录、病人治疗的日志等。</p>
+<p>在 Process Mining 中，我们需要关注的是process models 与 event data 之间的关系。如下图所示：<br><img src="http://brucenan.qiniudn.com/pm-ppp.png" alt="Process Mining 的类型"></p>
+<ol>
+<li>Play Out：从已知的process模型中生成 event data</li>
+<li>Play-In：根据 event data 发现 process模型，是一个discovery的过程。</li>
+<li>Replay：已知 model 和 event data，二者互相验证，发现 event data 和 model 的问题</li>
+</ol>
+<p>Replay 可以带上 timestamp，即 event data 的数据会带有时间戳，可以知道每个步骤的耗时。Replay 可以用来做performance analysis，发现过程中哪里是瓶颈。</p>
+<p>下图是对整个 process mining 的概要描述<br><img src="http://brucenan.qiniudn.com/pm-overview.png" alt="Overview"></p>
+<ul>
+<li><strong>World</strong> （真实世界），即事件真实发生的存在；</li>
+<li><strong>Software System</strong>（软件系统），负责记录事件发生，并生成 event logs</li>
+<li><strong>Event logs</strong>（日志），可以用来发现process models</li>
+<li><strong>Model</strong>（模型），eventlogs 可以与 model 做一致性的验证，改进 model</li>
+</ul>
+<p>从这几部分中，我们可以再次总结一下 process mining 的三种类型：<br>Play-Out在图中说明 process model在不利用 eventlog 的情况下，在真实世界和软件系统中的应用。<br>Play-In 负责利用eventlog来发现 process model<br>Replay 主要体现在 conformance 和 enhancement</p>
+<h1 id="Process_Mining与Data_Mining">Process Mining与Data Mining</h1><p>Process Mining之前说过，它集中解决 compliance 和 perfermance 相关的问题，在数据领域，它更像是胶水，把很多方面都粘合在一起，如：</p>
+<ul>
+<li>Data 与 Process</li>
+<li>Business 与 IT</li>
+<li>Busienss Intelligence 与Business Process Management</li>
+<li>Performance 与 Compliance</li>
+<li>Runtime 与 Design Time</li>
+</ul>
+<p>Process Mining 与 BPM 和 data mining 的关系如下：<br><img src="http://brucenan.qiniudn.com/pm-position.png" alt="Process Mining所处位置"><br>特别提到了与 BI 的关系，并举了例子，介绍了 BI 只是将数据以不同的形式展现，而数据背后的深层的涵义，BI 则无法处理了。</p>
+<p>Process Discovery（过程模型的发现），与语言的学习类似，在不断的语言环境下学习新的语言在各种情况下的使用，最终学会语言（掌握了过程的模型）。</p>
+<p>Data Mining 是 data-centre，而不是 process-centre 的。</p>
+<p>课中举了几个数据集的例子，如学生的成绩记录，咖啡店顾客的消费记录等。</p>
+<ul>
+<li>数据集由 <strong>instances（实例）</strong>组成（individuals, entities,cases, objects, or records）,通常指每行数据;</li>
+<li><strong>Variables（变量）</strong>是指数据的各属性，通常以列的形式存在。变量一般有两种类型：<ol>
+<li><strong>categorical variables</strong>：ordinal（序数的）和 nominal（名词性的）特征属性，如 high-med-low，true-false，red-pink-green 等</li>
+<li><strong>numerical variables</strong>：以数字形式存在的变量值</li>
+</ol>
+</li>
+</ul>
+<p>数据挖掘技术一般有两类，<strong>supervised learning（有监督学习）</strong>和 <strong>unsupervised learning（无监督学习）</strong>：</p>
+<p>有监督学习下，存在着labeled data，即 instance 中有专门的<strong>response variable</strong>用来标注整个 instance，它的目标是按照<strong>predictor variables</strong>（dependent variable）来解析response variable（independent variables）。</p>
+<p>对于有监督学习，一般采用classification（如决策树） 和regression 的技术：</p>
+<ul>
+<li>Classification 主要针对categorical response variable，目标是根据predictor variables 把 instance 进行分类；</li>
+<li>Regression 针对的则是 numerical response variable，目标是找出一个符合数据的函数，并使误差减到最小。</li>
+</ul>
+<p>而无监督学习，则是没是 labeled data 的，即 instance 中并没有 response variable和 predictor variables 的区分。针对无监督学习的典型技术有：</p>
+<ul>
+<li>clustering（聚类），如 k-mean clusters</li>
+<li>pattern discovery，如association rules （关联规则）</li>
+</ul>
+<h1 id="Decision_Tree">Decision Tree</h1><p>在决策树方法中，有多个 predictor variables，并且有一个 response variable，我们会根据多个 predictor variables 来预测一个 response variable 的值。比如下面的例子，以死亡人是否饮酒、抽烟、体重作为 predictor 变量，年龄做为 response 变量，来进行的分析：<br><img src="http://brucenan.qiniudn.com/pm-dtexample.png" alt="Decision Tree 的例子"></p>
+<p>注意叶子结点上的数字，左边的数字表明符合该路径的instance 数量，右边表示不符合决策树的 instance 数。</p>
+<p>决策树的基础原理，就是把 instance 的数据集拆分成更小的子集，从一个很大的不确定性的状态（high entropy），划分成确定性逐渐增大的子集，这样的过程就是构建决策树的过程。<br><img src="http://brucenan.qiniudn.com/pm-dtstep.png" alt="Decision Tree 的 构建过程"></p>
+<h2 id="熵">熵</h2><p>所以，理解决策树，就要充分了解<strong>entropy（熵）</strong>。熵是一种degree of uncertainty，一种对不确定性的度量。计算决策树叶子结点的熵值，并不断的降低熵值，就是一个不断改进预测的过程。<br><img src="http://brucenan.qiniudn.com/pm-entropy.png" alt="熵的计算"></p>
+<p>举个例子，有六个病人的数据，在没有进行决策树划分的时候，作为一个整体，计算它的熵值：<br>E=-（3/6<em>log2(3/6)+3/6</em>log2(3/6)） = 1<br>在划分为是否抽烟的两个子结点后，每个子结点的计算：<br>会得出 E1=0，E2=0.811</p>
+<p>对于一棵树的多个子结点，我们采用加权平均的方式，把每个子结点的熵值与它的比重相乘，求和计算出整个决策树的熵值。<br><img src="http://brucenan.qiniudn.com/pm-gainentropy.png" alt="Information gain"></p>
+<p>在决策树的改进过程中，我们可以发现整个树的熵值是在不断变小，每次改进都获得更多的信息（information gain）值。即熵值越小，信息的获取就越多。</p>
+<h2 id="决策树生成算法">决策树生成算法</h2><p>下面是生成决策树的一个简单算法描述：</p>
+<ol>
+<li>首先从根结点开始，包括所有的数据；</li>
+<li>迭代的遍历所有的结点，查看是否在 information gain；</li>
+<li>对于每个结点以及它的每一个属性，都计算如果按照该属性分拆结点后的信息获取情况；</li>
+<li>选择那个获取信息最多的属性作为开端；</li>
+<li>继续之前的操作，直到信息获取不在再明显的改善；</li>
+<li><p>返回一个决策树；</p>
+<p>在决策树的算法中，有许多参数（变量）可以调定，比如：</p>
+<ol>
+<li>minimal size of a node：定义结点在分拆前后的最小数量，以避免 overfitting</li>
+<li>threshold setting the minimal gain：信息增量的最小值，比小于该值，则不再拆分结点</li>
+<li>Maximal depth of the tree：树的最大深度</li>
+<li>Allowing the same label to appear multiple times or not: 是否可重复使用同一 label</li>
+<li>Alternatives to entropy：采用不同的熵值计算</li>
+<li>Splitting the domain of a numerical variable: 将数值型的变量拆分归类</li>
+<li>Post pruning：剪枝，剪去不重要的树分支</li>
+</ol>
+</li>
+</ol>
+<h2 id="决策树的质量">决策树的质量</h2><p>如果判定决策树的质量如何？使用 Confusion Matrix</p>
+<p>防止决策树 overfitting 和 underfitting，我们需要寻找到一种介于两者间的平衡状态。</p>
+<h1 id="Association_Rule">Association Rule</h1><p>assocaition rule 是一种无监督的算法，不存在所谓的 labeled data。经典的啤酒与尿布的故事，就是关联规则算法的一个应用。<br>例如：{beer}-&gt;{diapers}</p>
+<p>所以关联规则的形式就是 X-&gt;Y (x implies y),x与 y 都是数据集中的项</p>
+<h2 id="三个度量的指标：">三个度量的指标：</h2><ol>
+<li><p>Support（支持度）:<br><img src="http://brucenan.qiniudn.com/pm-support.png" alt="Support指标"><br>support 的值范围在0到1之间，0最差，1最佳。</p>
+</li>
+<li><p>Confidence（置信度）：<br><img src="http://brucenan.qiniudn.com/pm-confidence.png" alt="Confidence 指标"><br>support 的值范围在0到1之间，0最差，1最佳。</p>
+</li>
+<li><p>Lift（提升度）：<br><img src="http://brucenan.qiniudn.com/pm-lift.png" alt="Lift 指标"></p>
+</li>
+</ol>
+<p>如果lift&gt;1,则 x 与 y 是正相关<br>如果 lift=1，则x 与 y是独立的<br>如果 lift&lt;1,则 x 与 y 是负相关</p>
+<p>对于关联规则，一个好的关联规则表现在：</p>
+<ol>
+<li>support 尽可能高</li>
+<li>confidence接近1</li>
+<li>lift 大于1</li>
+</ol>
+<h2 id="Bruce_force_approach">Bruce force approach</h2><p>其它类型的 pattern mining<br>sequence mining<br>episode mining</p>
+<h1 id="Cluster_Analysis">Cluster Analysis</h1><p>cluster analysis 也是一种 unsupervised learning techniques</p>
+<h1 id="Evaluating_Mining_Results">Evaluating Mining Results</h1>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://brucenan.github.io/2014/12/25/process1/" data-id="cihpmw89t000tetof9z8oxva8" class="article-share-link" data-share="baidu" data-title="Process Mining学习笔记（一）">分享到</a>
+      
+
+      
+        <a href="http://brucenan.github.io/2014/12/25/process1/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/过程挖掘/">过程挖掘</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/01/02/process2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          Process Mining学习笔记（二）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/11/08/dw-02/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">数据仓库的设计（二）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2014/12/25/process1/" data-title="Process Mining学习笔记（一）" data-url="http://brucenan.github.io/2014/12/25/process1/"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/数据仓库/">数据仓库</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据分析/">数据分析</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/过程挖掘/">过程挖掘</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Additive/" style="font-size: 15px;">Additive</a> <a href="/tags/DM/" style="font-size: 10px;">DM</a> <a href="/tags/Derived-Fact/" style="font-size: 15px;">Derived Fact</a> <a href="/tags/EDW/" style="font-size: 10px;">EDW</a> <a href="/tags/R/" style="font-size: 15px;">R</a> <a href="/tags/事实表/" style="font-size: 10px;">事实表</a> <a href="/tags/大数据/" style="font-size: 10px;">大数据</a> <a href="/tags/数据仓库/" style="font-size: 20px;">数据仓库</a> <a href="/tags/数据分析/" style="font-size: 15px;">数据分析</a> <a href="/tags/维度表/" style="font-size: 10px;">维度表</a> <a href="/tags/过程挖掘/" style="font-size: 15px;">过程挖掘</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">十一月 2014</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/06/15/dw-03/">数据仓库的设计（三）</a>
+          </li>
+        
+          <li>
+            <a href="/2015/01/13/r2/">R Programming笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/2015/01/12/r1/">R Programming笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2015/01/02/process2/">Process Mining学习笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/2014/12/25/process1/">Process Mining学习笔记（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 brucenan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"brucenan"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

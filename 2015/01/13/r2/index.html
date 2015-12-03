@@ -1,0 +1,434 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>R Programming笔记（二） | 面子与里子</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="R 语言的控制结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="R Programming笔记（二）">
+<meta property="og:url" content="http://brucenan.github.io/2015/01/13/r2/index.html">
+<meta property="og:site_name" content="面子与里子">
+<meta property="og:description" content="R 语言的控制结构">
+<meta property="og:updated_time" content="2015-12-03T02:38:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="R Programming笔记（二）">
+<meta name="twitter:description" content="R 语言的控制结构">
+  
+    <link rel="alternative" href="/atom.xml" title="面子与里子" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?4f112a362ed49641c5089f2614a903e1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">面子与里子</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="brucenan.github.io">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-r2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/01/13/r2/" class="article-date">
+  <time datetime="2015-01-13T02:59:53.000Z" itemprop="datePublished">2015-01-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/数据分析/">数据分析</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      R Programming笔记（二）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="R_语言的控制结构">R 语言的控制结构</h1><a id="more"></a>
+<h2 id="条件">条件</h2><p>if-else 结构</p>
+<pre><code><span class="tag">if</span>(&lt;condition&gt;) {
+    ## <span class="tag">do</span> <span class="tag">something</span>
+}<span class="tag">else</span>{
+    ## <span class="tag">do</span> <span class="tag">something</span> <span class="tag">else</span>
+}
+
+<span class="tag">if</span>(&lt;condition1&gt;) {
+    ## <span class="tag">do</span> <span class="tag">something</span>
+} <span class="tag">else</span> <span class="tag">if</span>(&lt;condition2&gt;) {
+    ## <span class="tag">do</span> <span class="tag">something</span> <span class="tag">different</span>
+}<span class="tag">else</span>{
+    ## <span class="tag">do</span> <span class="tag">something</span> <span class="tag">different</span>
+}
+</code></pre><h2 id="循环">循环</h2><p>for 循环</p>
+<pre><code>x &lt;- <span class="built_in">c</span>(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>)
+<span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:<span class="number">4</span>) {
+    <span class="built_in">print</span>(x[i])
+}
+
+<span class="keyword">for</span>(i <span class="keyword">in</span> seq_along(x)) 
+{ 
+    <span class="built_in">print</span>(x[i])
+}
+
+<span class="keyword">for</span>(letter <span class="keyword">in</span> x) {
+    <span class="built_in">print</span>(letter)
+}
+</code></pre><p>while 循环：</p>
+<pre><code><span class="built_in">count</span> &lt;- <span class="number">0</span> 
+<span class="keyword">while</span>(<span class="built_in">count</span> &lt; <span class="number">10</span>) {
+    <span class="built_in">print</span>(<span class="built_in">count</span>)
+    <span class="built_in">count</span> &lt;- <span class="built_in">count</span> + <span class="number">1</span>
+}    
+</code></pre><p>repeat 循环：</p>
+<pre><code>x0&lt;-<span class="number">1</span> 
+tol &lt;- <span class="number">1e-8</span>
+
+repeat {
+    x1 &lt;- computeEstimate()
+    <span class="keyword">if</span>(<span class="built_in">abs</span>(x1 - x0) &lt; tol) { 
+        <span class="keyword">break</span>    
+    }<span class="keyword">else</span>{ 
+        x0&lt;-x1
+    } 
+}
+</code></pre><p>next 用于跳过本次循环，开始下一个循环；return 是直接返回</p>
+<h1 id="函数_function">函数 function</h1><p>格式为：</p>
+<pre><code>f &lt;- <span class="function"><span class="keyword">function</span><span class="params">(&lt;arguments&gt;)</span></span> {
+    ## <span class="keyword">Do</span> something interesting
+}
+</code></pre><p>函数的参数可以设定默认值</p>
+<p>参数具有 lazy evaluation 的特性，如果某个参数在函数中没有用到，那调用时可以不传入该参数，函数不会报错。</p>
+<p>…参数一般用来传递给内部调用的其它函数</p>
+<h1 id="Scoping_Rules">Scoping Rules</h1><h2 id="符号与值的绑定">符号与值的绑定</h2><p>R把一个符号绑定到一个值上，是通过一系列的 environments找到合适的值。当在 shell 下使用一个变量时，大概的过程是：</p>
+<ol>
+<li>查找全局的 environment， 是否有值匹配该变量符号；</li>
+<li>在 search list 中，查找每个 package 的 namespace</li>
+</ol>
+<p>search()可以查找当前的 search list 情况：</p>
+<ul>
+<li>global environment或user workspace通常是 search list 的第一个元素，base包总是最后一个元素。</li>
+<li>当用户使用 library 加载时，该 package 的 namespace 会在 search list 的第2位上，其它的元素会相应后移。</li>
+<li>R 对于函数和非函数有不同的 namespace，所以会同时有一个叫 c 的对象和叫 c 的函数。</li>
+</ul>
+<h2 id="Scoping_Rules-1">Scoping Rules</h2><p>scoping rules决定了在函数中，一个值如何与 free variable建立关联。</p>
+<p>R 使用lexical scoping和static scoping，一个可选的方案dynamic scoping。</p>
+<p>Scoping Rules 决定了 R如何使用search list为绑定符号和值。</p>
+<h2 id="Lexical_Scoping">Lexical Scoping</h2><p>如下面的函数：</p>
+<pre><code>f &lt;- <span class="function"><span class="keyword">function</span><span class="params">(x, y)</span> </span>{ 
+    x^<span class="number">2</span>+y/z
+}
+</code></pre><p>变量 z 在函数参数中未定义，但是直接使用了，这种变量称为free variable。<br>Scoping Rules定义了这种 free variable 是如何赋值的</p>
+<p>Lexical scoping的意思是：<br>the values of free variables are searched for in the environment in which the function was defined.</p>
+<p>environment 是一组键值对的组合，a collection of (symbol, value) pairs<br>每个 environment 有它的父 environment，一个environment 可能有多个子 environment；<br>没有父 environment 的 environment，是一个空的 environment<br>function+environment = a closure or function closure</p>
+<p>查找 free variable 的值的过程：</p>
+<ul>
+<li>If the value of a symbol is not found in the environment in which a function was defined, then the<br>search is continued in the parent environment.</li>
+<li>The search continues down the sequence of parent environments until we hit the top-level environment; this usually the global environment (workspace) or the namespace of a package.</li>
+<li>After the top-level environment, the search continues down the search list until we hit the empty environment. If a value for a given symbol cannot be found once the empty environment is arrived at, then an error is thrown.</li>
+</ul>
+<h1 id="R_Scoping_Rules">R Scoping Rules</h1><p>When a function is defined in the global environment and is subsequently called from the global environment, then the defining environment and the calling environment are the same. This can sometimes give the appearance of dynamic scoping.</p>
+<ul>
+<li>In R, all objects must be stored in memory</li>
+<li>All functions must carry a pointer to their respective defining environments, which could be anywhere</li>
+<li>In S-PLUS, free variables are always looked up in the global workspace, so everything can be stored on the disk because the “defining environment” of all functions is the same.</li>
+</ul>
+<p>Lexical scoping summary</p>
+<ul>
+<li>Objective functions can be “built” which contain all of the necessary data for evaluating the function</li>
+<li>No need to carry around long argument lists — useful for interactive and exploratory work.</li>
+<li>Code can be simplified and cleand up</li>
+</ul>
+<h1 id="Coding_Standards_for_R">Coding Standards for R</h1><ol>
+<li>Always use text files / text editor</li>
+<li>Indent your code</li>
+<li>Limit the width of your code (80 columns?)</li>
+<li>Limit the length of individual functions</li>
+</ol>
+<h1 id="Date_and_Time">Date and Time</h1><p>日期用 Date 类表示，它的内部是记录自从1970-1-1开始的天数</p>
+<p>时间用POSIXct或者POSIXlt类表示，内部记录的是以从1970-1-1开始的秒数</p>
+<pre><code>x &lt;- as.<span class="function"><span class="title">Date</span><span class="params">(<span class="string">"1970-01-01"</span>)</span></span>
+</code></pre><ul>
+<li>POSIXct is just a very large integer under the hood; it use a useful class when you want to store times in something like a data frame</li>
+<li>POSIXlt is a list underneath and it stores a bunch of other useful information like the day of the week, day of the year, month, day of the month</li>
+</ul>
+<p>Times can be coerced from a character string using the as.POSIXlt or as.POSIXct function.</p>
+<pre><code>x &lt;- Sys.<span class="function"><span class="title">time</span><span class="params">()</span></span>
+[<span class="number">1</span>] <span class="string">"2013-01-24 22:04:14 EST"</span>
+
+<span class="tag">p</span> &lt;- as.<span class="function"><span class="title">POSIXlt</span><span class="params">(x)</span></span>
+<span class="function"><span class="title">names</span><span class="params">(unclass(p)</span></span>)
+[<span class="number">1</span>] <span class="string">"sec"</span> <span class="string">"min"</span> <span class="string">"hour"</span> <span class="string">"mday"</span> <span class="string">"mon"</span>
+[<span class="number">6</span>] <span class="string">"year"</span> <span class="string">"wday"</span> <span class="string">"yday"</span> <span class="string">"isdst"</span>
+p<span class="variable">$sec</span>
+[<span class="number">1</span>] <span class="number">14.34</span>
+</code></pre><p>strptime函数用来转换日期格式：</p>
+<pre><code>datestring &lt;- <span class="function"><span class="title">c</span><span class="params">(<span class="string">"January 10, 2012 10:40"</span>, <span class="string">"December 9, 2011 9:10"</span>)</span></span> 
+x &lt;- <span class="function"><span class="title">strptime</span><span class="params">(datestring, <span class="string">"%B %d, %Y %H:%M"</span>)</span></span>
+x
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://brucenan.github.io/2015/01/13/r2/" data-id="cihpmw894000detofnja3qlw5" class="article-share-link" data-share="baidu" data-title="R Programming笔记（二）">分享到</a>
+      
+
+      
+        <a href="http://brucenan.github.io/2015/01/13/r2/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R/">R</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据分析/">数据分析</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/06/15/dw-03/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          数据仓库的设计（三）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/01/12/r1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">R Programming笔记（一）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2015/01/13/r2/" data-title="R Programming笔记（二）" data-url="http://brucenan.github.io/2015/01/13/r2/"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/数据仓库/">数据仓库</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据分析/">数据分析</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/过程挖掘/">过程挖掘</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Additive/" style="font-size: 15px;">Additive</a> <a href="/tags/DM/" style="font-size: 10px;">DM</a> <a href="/tags/Derived-Fact/" style="font-size: 15px;">Derived Fact</a> <a href="/tags/EDW/" style="font-size: 10px;">EDW</a> <a href="/tags/R/" style="font-size: 15px;">R</a> <a href="/tags/事实表/" style="font-size: 10px;">事实表</a> <a href="/tags/大数据/" style="font-size: 10px;">大数据</a> <a href="/tags/数据仓库/" style="font-size: 20px;">数据仓库</a> <a href="/tags/数据分析/" style="font-size: 15px;">数据分析</a> <a href="/tags/维度表/" style="font-size: 10px;">维度表</a> <a href="/tags/过程挖掘/" style="font-size: 15px;">过程挖掘</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">十一月 2014</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/06/15/dw-03/">数据仓库的设计（三）</a>
+          </li>
+        
+          <li>
+            <a href="/2015/01/13/r2/">R Programming笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/2015/01/12/r1/">R Programming笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2015/01/02/process2/">Process Mining学习笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/2014/12/25/process1/">Process Mining学习笔记（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 brucenan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"brucenan"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>
