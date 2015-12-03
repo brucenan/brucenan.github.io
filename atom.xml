@@ -1,0 +1,835 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[面子与里子]]></title>
+  
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://brucenan.github.io/"/>
+  <updated>2015-12-03T02:38:40.000Z</updated>
+  <id>http://brucenan.github.io/</id>
+  
+  <author>
+    <name><![CDATA[brucenan]]></name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[数据仓库的设计（三）]]></title>
+    <link href="http://brucenan.github.io/2015/06/15/dw-03/"/>
+    <id>http://brucenan.github.io/2015/06/15/dw-03/</id>
+    <published>2015-06-15T12:58:52.000Z</published>
+    <updated>2015-12-03T02:38:40.000Z</updated>
+    <content type="html"><![CDATA[<p>本章是基于库存的商业模型，针对事实表做出了一些总结，以及对企业的价值链和企业总线做了介绍。</p>
+<h1 id="库存模型">库存模型</h1><p><img src="http://brucenan.qiniudn.com/dw3-periodic.png" alt="零售模型"></p>
+<p><img src="http://brucenan.qiniudn.com/dw3-transaction.png" alt="零售模型"></p>
+<p><img src="http://brucenan.qiniudn.com/dw3-accumulating.png" alt="零售模型"></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>本章是基于库存的商业模型，针对事实表做出了一些总结，以及对企业的价值链和企业总线做了介绍。</p>
+<h1 id="库存模型">库存模型</h1><p><img src="http://brucenan.qiniudn.com/dw3-periodic.png" alt="]]>
+    </summary>
+    
+      <category term="Additive" scheme="http://brucenan.github.io/tags/Additive/"/>
+    
+      <category term="Derived Fact" scheme="http://brucenan.github.io/tags/Derived-Fact/"/>
+    
+      <category term="数据仓库" scheme="http://brucenan.github.io/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/"/>
+    
+      <category term="数据仓库" scheme="http://brucenan.github.io/categories/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[R Programming笔记（二）]]></title>
+    <link href="http://brucenan.github.io/2015/01/13/r2/"/>
+    <id>http://brucenan.github.io/2015/01/13/r2/</id>
+    <published>2015-01-13T02:59:53.000Z</published>
+    <updated>2015-12-03T02:38:40.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="R_语言的控制结构">R 语言的控制结构</h1><a id="more"></a>
+<h2 id="条件">条件</h2><p>if-else 结构</p>
+<pre><code><span class="tag">if</span>(&lt;condition&gt;) {
+    ## <span class="tag">do</span> <span class="tag">something</span>
+}<span class="tag">else</span>{
+    ## <span class="tag">do</span> <span class="tag">something</span> <span class="tag">else</span>
+}
+
+<span class="tag">if</span>(&lt;condition1&gt;) {
+    ## <span class="tag">do</span> <span class="tag">something</span>
+} <span class="tag">else</span> <span class="tag">if</span>(&lt;condition2&gt;) {
+    ## <span class="tag">do</span> <span class="tag">something</span> <span class="tag">different</span>
+}<span class="tag">else</span>{
+    ## <span class="tag">do</span> <span class="tag">something</span> <span class="tag">different</span>
+}
+</code></pre><h2 id="循环">循环</h2><p>for 循环</p>
+<pre><code>x &lt;- <span class="built_in">c</span>(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>)
+<span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:<span class="number">4</span>) {
+    <span class="built_in">print</span>(x[i])
+}
+
+<span class="keyword">for</span>(i <span class="keyword">in</span> seq_along(x)) 
+{ 
+    <span class="built_in">print</span>(x[i])
+}
+
+<span class="keyword">for</span>(letter <span class="keyword">in</span> x) {
+    <span class="built_in">print</span>(letter)
+}
+</code></pre><p>while 循环：</p>
+<pre><code><span class="built_in">count</span> &lt;- <span class="number">0</span> 
+<span class="keyword">while</span>(<span class="built_in">count</span> &lt; <span class="number">10</span>) {
+    <span class="built_in">print</span>(<span class="built_in">count</span>)
+    <span class="built_in">count</span> &lt;- <span class="built_in">count</span> + <span class="number">1</span>
+}    
+</code></pre><p>repeat 循环：</p>
+<pre><code>x0&lt;-<span class="number">1</span> 
+tol &lt;- <span class="number">1e-8</span>
+
+repeat {
+    x1 &lt;- computeEstimate()
+    <span class="keyword">if</span>(<span class="built_in">abs</span>(x1 - x0) &lt; tol) { 
+        <span class="keyword">break</span>    
+    }<span class="keyword">else</span>{ 
+        x0&lt;-x1
+    } 
+}
+</code></pre><p>next 用于跳过本次循环，开始下一个循环；return 是直接返回</p>
+<h1 id="函数_function">函数 function</h1><p>格式为：</p>
+<pre><code>f &lt;- <span class="function"><span class="keyword">function</span><span class="params">(&lt;arguments&gt;)</span></span> {
+    ## <span class="keyword">Do</span> something interesting
+}
+</code></pre><p>函数的参数可以设定默认值</p>
+<p>参数具有 lazy evaluation 的特性，如果某个参数在函数中没有用到，那调用时可以不传入该参数，函数不会报错。</p>
+<p>…参数一般用来传递给内部调用的其它函数</p>
+<h1 id="Scoping_Rules">Scoping Rules</h1><h2 id="符号与值的绑定">符号与值的绑定</h2><p>R把一个符号绑定到一个值上，是通过一系列的 environments找到合适的值。当在 shell 下使用一个变量时，大概的过程是：</p>
+<ol>
+<li>查找全局的 environment， 是否有值匹配该变量符号；</li>
+<li>在 search list 中，查找每个 package 的 namespace</li>
+</ol>
+<p>search()可以查找当前的 search list 情况：</p>
+<ul>
+<li>global environment或user workspace通常是 search list 的第一个元素，base包总是最后一个元素。</li>
+<li>当用户使用 library 加载时，该 package 的 namespace 会在 search list 的第2位上，其它的元素会相应后移。</li>
+<li>R 对于函数和非函数有不同的 namespace，所以会同时有一个叫 c 的对象和叫 c 的函数。</li>
+</ul>
+<h2 id="Scoping_Rules-1">Scoping Rules</h2><p>scoping rules决定了在函数中，一个值如何与 free variable建立关联。</p>
+<p>R 使用lexical scoping和static scoping，一个可选的方案dynamic scoping。</p>
+<p>Scoping Rules 决定了 R如何使用search list为绑定符号和值。</p>
+<h2 id="Lexical_Scoping">Lexical Scoping</h2><p>如下面的函数：</p>
+<pre><code>f &lt;- <span class="function"><span class="keyword">function</span><span class="params">(x, y)</span> </span>{ 
+    x^<span class="number">2</span>+y/z
+}
+</code></pre><p>变量 z 在函数参数中未定义，但是直接使用了，这种变量称为free variable。<br>Scoping Rules定义了这种 free variable 是如何赋值的</p>
+<p>Lexical scoping的意思是：<br>the values of free variables are searched for in the environment in which the function was defined.</p>
+<p>environment 是一组键值对的组合，a collection of (symbol, value) pairs<br>每个 environment 有它的父 environment，一个environment 可能有多个子 environment；<br>没有父 environment 的 environment，是一个空的 environment<br>function+environment = a closure or function closure</p>
+<p>查找 free variable 的值的过程：</p>
+<ul>
+<li>If the value of a symbol is not found in the environment in which a function was defined, then the<br>search is continued in the parent environment.</li>
+<li>The search continues down the sequence of parent environments until we hit the top-level environment; this usually the global environment (workspace) or the namespace of a package.</li>
+<li>After the top-level environment, the search continues down the search list until we hit the empty environment. If a value for a given symbol cannot be found once the empty environment is arrived at, then an error is thrown.</li>
+</ul>
+<h1 id="R_Scoping_Rules">R Scoping Rules</h1><p>When a function is defined in the global environment and is subsequently called from the global environment, then the defining environment and the calling environment are the same. This can sometimes give the appearance of dynamic scoping.</p>
+<ul>
+<li>In R, all objects must be stored in memory</li>
+<li>All functions must carry a pointer to their respective defining environments, which could be anywhere</li>
+<li>In S-PLUS, free variables are always looked up in the global workspace, so everything can be stored on the disk because the “defining environment” of all functions is the same.</li>
+</ul>
+<p>Lexical scoping summary</p>
+<ul>
+<li>Objective functions can be “built” which contain all of the necessary data for evaluating the function</li>
+<li>No need to carry around long argument lists — useful for interactive and exploratory work.</li>
+<li>Code can be simplified and cleand up</li>
+</ul>
+<h1 id="Coding_Standards_for_R">Coding Standards for R</h1><ol>
+<li>Always use text files / text editor</li>
+<li>Indent your code</li>
+<li>Limit the width of your code (80 columns?)</li>
+<li>Limit the length of individual functions</li>
+</ol>
+<h1 id="Date_and_Time">Date and Time</h1><p>日期用 Date 类表示，它的内部是记录自从1970-1-1开始的天数</p>
+<p>时间用POSIXct或者POSIXlt类表示，内部记录的是以从1970-1-1开始的秒数</p>
+<pre><code>x &lt;- as.<span class="function"><span class="title">Date</span><span class="params">(<span class="string">"1970-01-01"</span>)</span></span>
+</code></pre><ul>
+<li>POSIXct is just a very large integer under the hood; it use a useful class when you want to store times in something like a data frame</li>
+<li>POSIXlt is a list underneath and it stores a bunch of other useful information like the day of the week, day of the year, month, day of the month</li>
+</ul>
+<p>Times can be coerced from a character string using the as.POSIXlt or as.POSIXct function.</p>
+<pre><code>x &lt;- Sys.<span class="function"><span class="title">time</span><span class="params">()</span></span>
+[<span class="number">1</span>] <span class="string">"2013-01-24 22:04:14 EST"</span>
+
+<span class="tag">p</span> &lt;- as.<span class="function"><span class="title">POSIXlt</span><span class="params">(x)</span></span>
+<span class="function"><span class="title">names</span><span class="params">(unclass(p)</span></span>)
+[<span class="number">1</span>] <span class="string">"sec"</span> <span class="string">"min"</span> <span class="string">"hour"</span> <span class="string">"mday"</span> <span class="string">"mon"</span>
+[<span class="number">6</span>] <span class="string">"year"</span> <span class="string">"wday"</span> <span class="string">"yday"</span> <span class="string">"isdst"</span>
+p<span class="variable">$sec</span>
+[<span class="number">1</span>] <span class="number">14.34</span>
+</code></pre><p>strptime函数用来转换日期格式：</p>
+<pre><code>datestring &lt;- <span class="function"><span class="title">c</span><span class="params">(<span class="string">"January 10, 2012 10:40"</span>, <span class="string">"December 9, 2011 9:10"</span>)</span></span> 
+x &lt;- <span class="function"><span class="title">strptime</span><span class="params">(datestring, <span class="string">"%B %d, %Y %H:%M"</span>)</span></span>
+x
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="R_语言的控制结构">R 语言的控制结构</h1>]]>
+    
+    </summary>
+    
+      <category term="R" scheme="http://brucenan.github.io/tags/R/"/>
+    
+      <category term="数据分析" scheme="http://brucenan.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+      <category term="数据分析" scheme="http://brucenan.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[R Programming笔记（一）]]></title>
+    <link href="http://brucenan.github.io/2015/01/12/r1/"/>
+    <id>http://brucenan.github.io/2015/01/12/r1/</id>
+    <published>2015-01-12T02:58:31.000Z</published>
+    <updated>2015-12-03T02:38:40.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="R_的基本介绍">R 的基本介绍</h1><p>R 语言基于 S 语言，是一种免费的用于数据分析的语言。</p>
+<p>R系统从概念上分为两部分：</p>
+<ol>
+<li>从 CRAN上下载的基础的R 系统；</li>
+<li>其它</li>
+</ol>
+<p>R 的功能基本上是由各种不同的 package 提供实现的:<br><a id="more"></a></p>
+<ul>
+<li>base包提供 R 的基本功能；</li>
+<li>R 的基础部分包括这些 packages：utils, stats, datasets, graphics, grDevices, grid, methods, tools, parallel, compiler, splines, tcltk, stats4</li>
+<li>其它一些推荐安装的 packages：boot, class, cluster, codetools, foreign, KernSmooth, lattice, mgcv, nlme, rpart, survival, MASS, spatial, nnet, Matrix</li>
+</ul>
+<h1 id="R_的_Input_和_Evaluation">R 的 Input 和 Evaluation</h1><p>R 使用<strong>&lt;-</strong>符号作为赋值操作，<strong>=</strong>也可以。</p>
+<p>如<br><code>x&lt;-1</code><br>可以使用<code>x</code>或<code>print(x)</code>显示 x 的值。</p>
+<ul>
+<li>x：自动显示</li>
+<li>print（x）：明确指定显示</li>
+</ul>
+<p>当输入一个表达式变量并回车后，变量即被 evaludated ，并返回变量的结果。</p>
+<p><code>x&lt;-1:20</code></p>
+<p><strong>:</strong>符号表示建立一个整形的序列</p>
+<h1 id="R_的数据类型">R 的数据类型</h1><h2 id="对象类型">对象类型</h2><p>R的5种基本（atomic）的数据类型：</p>
+<ol>
+<li>character</li>
+<li>numeric（real numbers）</li>
+<li>integer</li>
+<li>complex</li>
+<li>logical（True/False）</li>
+</ol>
+<p>常用的对象类型有 vector，vector 只能包含相同的数据类型，但有一个例外，就是 list，它以 vector 形式显示，但可以保存不同的数据类型。</p>
+<p>空 vector 可以用<strong>vector()</strong>表示。</p>
+<h2 id="Numbers">Numbers</h2><p>R 中的数字默认为numberic 类型，即双精度浮点数，如果是整型数据，需要指定 L 后缀。例如1是一个numberic 对象，而1L 则是integer。</p>
+<p>Inf 代表无限，1/0的结果是 Inf。Inf 可以用来计算中，如1/Inf=0。</p>
+<p>NaN代表未定义的，如0/0，也可以代表缺失的值。</p>
+<h2 id="Vectors">Vectors</h2><p>建立 vector对象，可以使用 <strong>c()</strong>函数进行，如：</p>
+<pre><code>x&lt;-<span class="function"><span class="title">c</span><span class="params">(<span class="number">0.5</span>,<span class="number">0.6</span>)</span></span>        #<span class="id">#numeric</span>
+x&lt;-<span class="function"><span class="title">c</span><span class="params">(<span class="string">"a"</span>,<span class="string">"b"</span>,<span class="string">"c"</span>)</span></span>    #<span class="id">#character</span>
+x&lt;-<span class="function"><span class="title">c</span><span class="params">(TRUE,FALSE)</span></span>    #<span class="id">#logical</span>
+x&lt;-<span class="function"><span class="title">c</span><span class="params">(<span class="number">12</span>:<span class="number">23</span>)</span></span>        #<span class="id">#integer</span>
+x&lt;-<span class="function"><span class="title">c</span><span class="params">(<span class="number">1</span>+<span class="number">0</span>i,<span class="number">2</span>-<span class="number">4</span>i)</span></span>    ##complex
+</code></pre><p>也可以用vector()初始化对象，如：</p>
+<pre><code>x&lt;-<span class="built_in">vector</span>(<span class="string">"numeric"</span>,length=<span class="number">10</span>)
+x
+[<span class="number">1</span>] <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>
+</code></pre><p>当不同的对象类型混合在一个 vector 里的时候，会发生coercion（胁迫），将 vector 内的对象转换成相同类型的对象。</p>
+<pre><code>y=<span class="function"><span class="title">c</span><span class="params">(<span class="number">1.7</span>,<span class="string">"a"</span>)</span></span>
+y
+[<span class="number">1</span>] <span class="string">"1.7"</span> <span class="string">"a"</span>
+</code></pre><p>可以看到，numeric 类型的1.7被强制转换成了”1.7”。这种是自动的转换数据类型。</p>
+<p>还可以指定明确的转换类型，使用<strong>as.*</strong>来进行转换：</p>
+<pre><code>x=<span class="number">0</span>:<span class="number">6</span>
+<span class="class"><span class="keyword">class</span>(<span class="title">x</span>)</span>
+结果：
+[<span class="number">1</span>] <span class="string">"integer"</span>
+
+as.logical(x)
+结果：
+[<span class="number">1</span>] <span class="literal">FALSE</span>  <span class="literal">TRUE</span>  <span class="literal">TRUE</span>  <span class="literal">TRUE</span>  <span class="literal">TRUE</span>  <span class="literal">TRUE</span>  <span class="literal">TRUE</span>
+</code></pre><p>对于无意义的指定转换，结果为NA：</p>
+<pre><code>x &lt;- <span class="function"><span class="title">c</span><span class="params">(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>)</span></span>
+as.<span class="function"><span class="title">numeric</span><span class="params">(x)</span></span>
+[<span class="number">1</span>]NA NA NA
+</code></pre><h2 id="Matrics">Matrics</h2><p>矩阵是有维度属性的vector，矩阵 matrics 的 dimension 属性是由一个长度为2的整数vector(nrow,ncol)组成。</p>
+<p>创建 matrics 的几种方法：</p>
+<pre><code>m = matrix(nrow=<span class="number">2</span>,ncol=<span class="number">3</span>)
+
+    [,<span class="number">1</span>] [,<span class="number">2</span>] [,<span class="number">3</span>] 
+[<span class="number">1</span>,] NA NA NA 
+[<span class="number">2</span>,] NA NA NA
+
+m = matrix(<span class="number">1</span>:<span class="number">6</span>,nrow = <span class="number">2</span>, ncol = <span class="number">3</span>)
+
+    [,<span class="number">1</span>] [,<span class="number">2</span>] [,<span class="number">3</span>] 
+[<span class="number">1</span>,] <span class="number">1</span>     <span class="number">3</span>     <span class="number">5</span> 
+[<span class="number">2</span>,] <span class="number">2</span>     <span class="number">4</span>     <span class="number">6</span>
+
+m = <span class="number">1</span>:<span class="number">10</span>
+dim(m) = c(<span class="number">2</span>,<span class="number">5</span>)
+    [,<span class="number">1</span>] [,<span class="number">2</span>] [,<span class="number">3</span>] [,<span class="number">4</span>] [,<span class="number">5</span>] 
+[<span class="number">1</span>,] <span class="number">1</span>     <span class="number">3</span>     <span class="number">5</span>     <span class="number">7</span>     <span class="number">9</span> 
+[<span class="number">2</span>,] <span class="number">2</span>     <span class="number">4</span>     <span class="number">6</span>     <span class="number">8</span>     <span class="number">10</span>
+</code></pre><p>还可以使用 cbind()和rbind()把 vector 拼成一个 matrics：</p>
+<pre><code>x = <span class="number">1</span>:<span class="number">3</span>
+y = <span class="number">10</span>:<span class="number">12</span>
+cbind(x,y)
+    x    y 
+[<span class="number">1</span>,] <span class="number">1</span> <span class="number">10</span> 
+[<span class="number">2</span>,] <span class="number">2</span> <span class="number">11</span> 
+[<span class="number">3</span>,] <span class="number">3</span> <span class="number">12</span>
+
+rbind(x,y)
+    [,<span class="number">1</span>] [,<span class="number">2</span>] [,<span class="number">3</span>] 
+x    <span class="number">1</span>    <span class="number">2</span>    <span class="number">3</span> 
+y   <span class="number">10</span>     <span class="number">11</span>     <span class="number">12</span>
+</code></pre><h2 id="Factors">Factors</h2><p>Factors用来展现分类的数据，它可以是有顺序的也可以无序。可以把他们看作是一个整数的向量，其中每个整数有一个标签。<br>（类似枚举类型）</p>
+<pre><code>x &lt;- <span class="function"><span class="title">factor</span><span class="params">(c(<span class="string">"yes"</span>, <span class="string">"yes"</span>, <span class="string">"no"</span>, <span class="string">"yes"</span>, <span class="string">"no"</span>)</span></span>)
+[<span class="number">1</span>] yes yes no yes no
+
+<span class="function"><span class="title">table</span><span class="params">(x)</span></span>
+<span class="function"><span class="title">unclass</span><span class="params">(x)</span></span>
+</code></pre><p>Factors中的元素顺序可以通过 level 来设定，</p>
+<pre><code>x &lt;- <span class="function"><span class="title">factor</span><span class="params">(c(<span class="string">"yes"</span>, <span class="string">"yes"</span>, <span class="string">"no"</span>, <span class="string">"yes"</span>, <span class="string">"no"</span>)</span></span>, 
+                   levels = <span class="function"><span class="title">c</span><span class="params">(<span class="string">"yes"</span>, <span class="string">"no"</span>)</span></span>)
+</code></pre><h2 id="Missing_Values">Missing Values</h2><p>NA 和 NAN 用来代表未定义的数学操作</p>
+<p>is.na()判断是否为 NA<br>is.nan()判断是否为 NaN</p>
+<p>NA 值也有一个类型，所以存在integer的 NA，character 的 NA 等<br>NaN 也是 NA，但 NA 不是 NaN</p>
+<pre><code>x&lt;-c(<span class="number">1</span>,<span class="number">2</span>,NA,<span class="number">10</span>,<span class="number">3</span>)
+<span class="keyword">is</span>.na(x)
+[<span class="number">1</span>] <span class="keyword">FALSE</span> <span class="keyword">FALSE</span> <span class="keyword">TRUE</span> <span class="keyword">FALSE</span> <span class="keyword">FALSE</span>
+
+<span class="keyword">is</span>.nan(x)
+[<span class="number">1</span>] <span class="keyword">FALSE</span> <span class="keyword">FALSE</span> <span class="keyword">FALSE</span> <span class="keyword">FALSE</span> <span class="keyword">FALSE</span>
+
+x&lt;-c(<span class="number">1</span>,<span class="number">2</span>,NaN,NA,<span class="number">4</span>)
+<span class="keyword">is</span>.na(x)
+[<span class="number">1</span>] <span class="keyword">FALSE</span> <span class="keyword">FALSE</span> <span class="keyword">TRUE</span> <span class="keyword">TRUE</span> <span class="keyword">FALSE</span>
+
+<span class="keyword">is</span>.nan(x)
+[<span class="number">1</span>] <span class="keyword">FALSE</span> <span class="keyword">FALSE</span> <span class="keyword">TRUE</span> <span class="keyword">FALSE</span> <span class="keyword">FALSE</span>
+</code></pre><h2 id="Data_Frames">Data Frames</h2><p>Data Frames用来存储表格数据(tabular data)</p>
+<p>通常，data frames 是由read.table()或read.csv()创建的。<br>可以使用data.matrix()转换为 matrix</p>
+<pre><code>x &lt;- data.<span class="function"><span class="title">frame</span><span class="params">(foo = <span class="number">1</span>:<span class="number">4</span>, bar = c(T, T, F, F)</span></span>) &gt;x
+  foo bar
+<span class="number">1</span> <span class="number">1</span> TRUE
+<span class="number">2</span> <span class="number">2</span> TRUE
+<span class="number">3</span> <span class="number">3</span> FALSE
+<span class="number">4</span> <span class="number">4</span> FALSE
+
+<span class="function"><span class="title">nrow</span><span class="params">(x)</span></span> 
+[<span class="number">1</span>] <span class="number">4</span>
+
+<span class="function"><span class="title">ncol</span><span class="params">(x)</span></span> 
+[<span class="number">1</span>] <span class="number">2</span>
+</code></pre><h2 id="Names">Names</h2><p>可以对R 的对象进行命名操作</p>
+<pre><code>x&lt;-1<span class="value">:<span class="number">3</span>   ## 针对 vector
+<span class="function">names</span>(x)
+NULL
+
+<span class="function">names</span>(x) &lt;- <span class="function">c</span>(<span class="string">"foo"</span>, <span class="string">"bar"</span>, <span class="string">"norf"</span>) 
+x
+foo bar norf
+<span class="number">1</span>    <span class="number">2</span>    <span class="number">3</span>
+
+<span class="function">names</span>(x)
+[<span class="number">1</span>] <span class="string">"foo"</span> <span class="string">"bar"</span> <span class="string">"norf"</span>
+
+x&lt;<span class="function">-list</span>(a=<span class="number">1</span>,b=<span class="number">2</span>,c=<span class="number">3</span>)  ## 针对 list
+
+m &lt;- <span class="function">matrix</span>(<span class="number">1</span>:<span class="number">4</span>, nrow = <span class="number">2</span>, ncol = <span class="number">2</span>)  ##针对 matrices
+<span class="function">dimnames</span>(m) &lt;- <span class="function">list</span>(<span class="function">c</span>(<span class="string">"a"</span>, <span class="string">"b"</span>), <span class="function">c</span>(<span class="string">"c"</span>, <span class="string">"d"</span>))</span>
+</code></pre><h1 id="Reading/Writing_data">Reading/Writing data</h1><ul>
+<li><strong>read.table</strong>, <strong>read.csv</strong>用来读取表格数据，对应write.table</li>
+<li><strong>readLines</strong>读取文本文件的行,对应writeLines</li>
+<li><strong>source</strong> 读取 R 的 code 文件，对应dump</li>
+<li><strong>dget</strong>, 读取 R 文件，对应dput</li>
+<li><strong>load</strong>, 读取workspaces文件，对应save</li>
+<li><strong>unserialize</strong>, 读取R对象，对应serialize</li>
+</ul>
+<h2 id="read-table">read.table</h2><p>read.table是最常用的读取数据的方法，有以下的参数：</p>
+<ul>
+<li><strong>file</strong>：文件名</li>
+<li><strong>header</strong>：logical值，是否有 header 行</li>
+<li><strong>sep</strong>：列分隔字符</li>
+<li><strong>colClasses</strong>： 一个character向量，说明数据集中每一列的类型</li>
+<li><strong>nrows</strong>：行数</li>
+<li><strong>comment.char</strong>：注释字符</li>
+<li><strong>skip</strong>：从文件头跳过的行数</li>
+<li><strong>stringsAsFactors</strong>：是否把字符变量转化为 factors</li>
+</ul>
+<p>读取方法：</p>
+<pre><code>data &lt;- read.<span class="function"><span class="title">table</span><span class="params">(<span class="string">"foo.txt"</span>)</span></span>
+</code></pre><p>在读取过程中，R 会：</p>
+<ul>
+<li>会跳过所有以#开头的行</li>
+<li>会显示多少行，分配了多少内存</li>
+<li>说明每一列的变量类型</li>
+<li>read.csv()也是一种 read.table()，只不过默认以，为分隔符 </li>
+</ul>
+<p>对于大数据，有一些方法可以提高读取的速度：</p>
+<ol>
+<li>设置comment.char = “”，如果没有注释行</li>
+<li>使用 colClasses参数，指定每一列的类型，这样读取速度可以提高一倍。如所有的列都是 numeric，可以设置 colClasses=”numeric”。</li>
+</ol>
+<p>另一个 dirty 方法，可以解决不同列类型的表:</p>
+<pre><code><span class="attribute">initial</span> &lt;- read.<span class="function"><span class="title">table</span><span class="params">(<span class="string">"datatable.txt"</span>, nrows = <span class="number">100</span>)</span></span> 
+classes &lt;- <span class="function"><span class="title">sapply</span><span class="params">(initial, class)</span></span>
+tabAll &lt;- read.<span class="function"><span class="title">table</span><span class="params">(<span class="string">"datatable.txt"</span>,colClasses = classes)</span></span>
+</code></pre><h2 id="读取其它文件">读取其它文件</h2><p>file：读取文件<br>gzfile：读取 gz 文件<br>bzfile：读取 bz 文件<br>url：读取 url</p>
+<pre><code>con &lt;- <span class="function"><span class="title">file</span><span class="params">(<span class="string">"foo.txt"</span>, <span class="string">"r"</span>)</span></span> 
+data &lt;- read.<span class="function"><span class="title">csv</span><span class="params">(con)</span></span> 
+<span class="function"><span class="title">close</span><span class="params">(con)</span></span>
+
+与
+data &lt;- read.<span class="function"><span class="title">csv</span><span class="params">(<span class="string">"foo.txt"</span>)</span></span>
+相同
+</code></pre><h1 id="Subsetting_子集">Subsetting 子集</h1><p>[]：返回与原始数据相同的类，可一次读取多个值<br>[[]]：从 list 或 data frame 中读取数据<br>$：用 name 方法从 list或 data frame 中读取数据</p>
+<p>三中读取值的方式的不同：</p>
+<pre><code>x &lt;- <span class="built_in">list</span>(foo = <span class="number">1</span>:<span class="number">4</span>, bar = <span class="number">0.6</span>)
+x[<span class="number">1</span>]
+$foo
+[<span class="number">1</span>]<span class="number">1234</span>
+
+x[[<span class="number">1</span>]]
+[<span class="number">1</span>]<span class="number">1234</span>
+
+x$bar
+[<span class="number">1</span>] <span class="number">0.6</span>
+x[[<span class="string">"bar"</span>]]
+[<span class="number">1</span>] <span class="number">0.6</span>
+x[<span class="string">"bar"</span>]
+$bar
+[<span class="number">1</span>] <span class="number">0.6</span>
+</code></pre><p>还可以用 vector 取值：</p>
+<pre><code>x &lt;- list(foo = <span class="number">1</span>:<span class="number">4</span>, bar = <span class="number">0</span>.<span class="number">6</span>, baz = <span class="string">"hello"</span>)
+x[c(<span class="number">1</span>, <span class="number">3</span>)]
+<span class="variable">$foo</span>
+[<span class="number">1</span>]<span class="number">1234</span>
+
+<span class="variable">$baz</span>
+[<span class="number">1</span>] <span class="string">"hello"</span>
+</code></pre><p>[[索引值可以为变量，而$只能使用常量名称：</p>
+<pre><code>x &lt;- <span class="built_in">list</span>(foo = <span class="number">1</span>:<span class="number">4</span>, bar = <span class="number">0.6</span>, baz = <span class="string">"hello"</span>)
+name &lt;- <span class="string">"foo"</span>
+x[[name]]
+[<span class="number">1</span>]<span class="number">1234</span>
+
+x$name
+<span class="literal">NULL</span>
+
+x$foo
+[<span class="number">1</span>] <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span>
+</code></pre><p>The [[ can take an integer sequence.</p>
+<pre><code>x &lt;- list(a = list(<span class="number">10</span>, <span class="number">12</span>, <span class="number">14</span>), b = c(<span class="number">3.14</span>, <span class="number">2.81</span>))
+x<span class="string">[[c(1, 3)]]</span>
+[<span class="number">1</span>] <span class="number">14</span>
+x<span class="string">[[1]]</span><span class="string">[[3]]</span>
+[<span class="number">1</span>] <span class="number">14</span>
+
+x<span class="string">[[c(2, 1)]]</span>
+[<span class="number">1</span>] <span class="number">3.14</span>
+</code></pre><p>Matrix使用[i,j]形式取值：</p>
+<pre><code>x &lt;- matrix(<span class="number">1</span>:<span class="number">6</span>, <span class="number">2</span>, <span class="number">3</span>)
+x[<span class="number">1</span>, <span class="number">2</span>]
+[<span class="number">1</span>] <span class="number">3</span>
+
+行或列可以缺失，就是取整列或整行：
+
+x[<span class="number">1</span>,]
+[<span class="number">1</span>]<span class="number">135</span>
+
+x[,<span class="number">2</span>]
+[<span class="number">1</span>]<span class="number">34</span>
+</code></pre><p>当对 matrix 取单一元素值的时候，加上drop = FALSE，可以使返回值从 vector 变成 matrix：</p>
+<pre><code>x &lt;- matrix(<span class="number">1</span>:<span class="number">6</span>, <span class="number">2</span>, <span class="number">3</span>)
+x[<span class="number">1</span>, <span class="number">2</span>]
+[<span class="number">1</span>] <span class="number">3</span>
+
+x[<span class="number">1</span>, <span class="number">2</span>, drop = FALSE]
+    [,<span class="number">1</span>] 
+[<span class="number">1</span>,] <span class="number">3</span>
+</code></pre><p>取整列的时候也是一样，drop=FALSE 可以把结果变成 matrix：</p>
+<pre><code>x &lt;- matrix(<span class="number">1</span>:<span class="number">6</span>, <span class="number">2</span>, <span class="number">3</span>)
+x[<span class="number">1</span>, , drop = FALSE]
+
+    [,<span class="number">1</span>] [,<span class="number">2</span>] [,<span class="number">3</span>] 
+[<span class="number">1</span>,] <span class="number">1</span>     <span class="number">3</span>     <span class="number">5</span>
+</code></pre><p>Partial Matching 部分匹配：</p>
+<p>[[和$取值时允许参数部分匹配，如：</p>
+<pre><code>x &lt;- <span class="built_in">list</span>(aardvark = <span class="number">1</span>:<span class="number">5</span>)
+
+x$a
+[<span class="number">1</span>]<span class="number">12345</span>
+
+x[[<span class="string">"a"</span>]]
+<span class="literal">NULL</span>     
+
+x[[<span class="string">"a"</span>, exact = FALSE]]
+[<span class="number">1</span>]<span class="number">12345</span>
+</code></pre><p>删除 NA 值的方法：</p>
+<pre><code>x&lt;-c(<span class="number">1</span>,<span class="number">2</span>,NA,<span class="number">4</span>,NA,<span class="number">5</span>)
+bad &lt;- is.na(x)
+x[!bad]
+[<span class="number">1</span>]<span class="number">1245</span>
+</code></pre><p>complete.cases(x, y)</p>
+<p>vector 的操作：</p>
+<pre><code>x&lt;-<span class="number">1</span>:<span class="number">4</span>;y&lt;-<span class="number">6</span>:<span class="number">9</span>
+x+y
+[<span class="number">1</span>]<span class="number">791113</span>
+
+x&gt;<span class="number">2</span>
+[<span class="number">1</span>] FALSE FALSE TRUE TRUE
+
+x &lt;- matrix(<span class="number">1</span>:<span class="number">4</span>, <span class="number">2</span>, <span class="number">2</span>); y &lt;- matrix(rep(<span class="number">10</span>, <span class="number">4</span>), <span class="number">2</span>, <span class="number">2</span>)
+x * y
+    [,<span class="number">1</span>] [,<span class="number">2</span>] 
+[<span class="number">1</span>,] <span class="number">10</span> <span class="number">30</span> 
+[<span class="number">2</span>,] <span class="number">20</span> <span class="number">40</span>
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="R_的基本介绍">R 的基本介绍</h1><p>R 语言基于 S 语言，是一种免费的用于数据分析的语言。</p>
+<p>R系统从概念上分为两部分：</p>
+<ol>
+<li>从 CRAN上下载的基础的R 系统；</li>
+<li>其它</li>
+</ol>
+<p>R 的功能基本上是由各种不同的 package 提供实现的:<br>]]>
+    
+    </summary>
+    
+      <category term="R" scheme="http://brucenan.github.io/tags/R/"/>
+    
+      <category term="数据分析" scheme="http://brucenan.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+      <category term="数据分析" scheme="http://brucenan.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Process Mining学习笔记（二）]]></title>
+    <link href="http://brucenan.github.io/2015/01/02/process2/"/>
+    <id>http://brucenan.github.io/2015/01/02/process2/</id>
+    <published>2015-01-02T02:02:25.000Z</published>
+    <updated>2015-12-03T02:38:40.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="Event_logs_and_process_models">Event logs and process models</h1><p>Event data 的来源有很多，如数据库系统，csv 文件，sap 系统等。</p>
+<p>Event data 一般由caseid，activity name，timestamp， otherdata 等组成，我们要学会如何从一个 event data 中识别上述的各项。</p>
+<p>Tranactional information： An event can represent 工<br>start，complete，suspend，resume，abort，etc<br><a id="more"></a><br>Process mining 过程中，经常使用xes 文件格式（extensible event system），它是一种专门应用于过程的文件格式。</p>
+<h1 id="Petri_Nets">Petri Nets</h1><p>Petri Nets 用来展现过程，由圆的 place 和方形的transitions组成，places 可以保持okens，transitions用来生产或消费 tokens。</p>
+<p>在 Petri Nets 中，状态称为marking，所以初始的状态就称为初始的 marking。</p>
+<p>如果是可以达到的状态，就称为 reachable ，否则就是 unreachable。</p>
+<p>当 transition 的每一个输入的 place 中，都包含一个 token 的时候，那么我们可以称Transation是enabled的。</p>
+<p>一个 enabled 的 transation 可以 fire，它会消费每个输入的 place 中的一个 token，然后为每个输出的 place，各生产一个 token。</p>
+<p>在并发的情况下，不同的 transation 可能执行的顺序不同，整个系统最终可能有多种不同的reachable状态。</p>
+<p>不同的 transation 之间竞争 token，会造成不同的 final markings。</p>
+<p>Reachability graph是一个 transation system，它有一个初始的状态，没有明确的结束状态。<br>Reachability graph的状态可能是无限的。</p>
+<h1 id="Transation_systems_and_Petri_Net_Properties">Transation systems and Petri Net Properties</h1><p>Boundedness<br>Safeness<br>Deadlock<br>Liveness<br>Complete traces</p>
+<h1 id="Alpha_algorithm">Alpha algorithm</h1><ul>
+<li><strong>Direct succession</strong>: x&gt;y, 如果 y 跟在 x 后面</li>
+<li><strong>Causality</strong>: x-&gt;y, 如果x&gt;y,且不存在y&gt;x</li>
+<li><strong>Parallel</strong>: x||y, 如果x&gt;y,且y&gt;x</li>
+<li><strong>Choice</strong>: x#y,如果不存在x&gt;y,且不存在y&gt;x.</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Event_logs_and_process_models">Event logs and process models</h1><p>Event data 的来源有很多，如数据库系统，csv 文件，sap 系统等。</p>
+<p>Event data 一般由caseid，activity name，timestamp， otherdata 等组成，我们要学会如何从一个 event data 中识别上述的各项。</p>
+<p>Tranactional information： An event can represent 工<br>start，complete，suspend，resume，abort，etc<br>]]>
+    
+    </summary>
+    
+      <category term="过程挖掘" scheme="http://brucenan.github.io/tags/%E8%BF%87%E7%A8%8B%E6%8C%96%E6%8E%98/"/>
+    
+      <category term="过程挖掘" scheme="http://brucenan.github.io/categories/%E8%BF%87%E7%A8%8B%E6%8C%96%E6%8E%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Process Mining学习笔记（一）]]></title>
+    <link href="http://brucenan.github.io/2014/12/25/process1/"/>
+    <id>http://brucenan.github.io/2014/12/25/process1/</id>
+    <published>2014-12-25T15:10:04.000Z</published>
+    <updated>2015-12-03T02:38:40.000Z</updated>
+    <content type="html"><![CDATA[<p>课程名称是 《Process Mining： Data Science in Action》，以下是课后笔记整理。</p>
+<h1 id="Date_Science_and_Big_Data">Date Science and Big Data</h1><p>当今的时代，海量数据不断地产生，在过去的10分钟产生的数据量，都超过了2003年之前人类历史上产生的所有数据。人类的各种活动，都会不断地产生一系列的event data（事件数据）。人类的事件数据形成了一个网，即Internet of Events。它的数据主要有4种来源：<br><a id="more"></a></p>
+<ol>
+<li>Internet of content 如web 页面数据</li>
+<li>Internet of People 社交网络上人们通过各种关系产生</li>
+<li>Internet of Things 物联网</li>
+<li>Internet of Places 地理位置信息</li>
+</ol>
+<p>由数据的指数级增长，又谈到了摩尔定律（Moore’s Law）,每两年芯片中晶体管的数量将翻一翻，在过去的40年间，数量增长了2^20=1048576。这种增长是非常惊人的。40年前从 Amsterdam 到 Newyork 要坐7小时的飞机，如果飞机的飞行速度发展也能遵照摩尔定律，那么40年后只需0.024秒（可惜并没有如此高速发展）……</p>
+<p>如今，我们关注的不是如何生成数据，而是如何从海量数据中发现有价值的内容。</p>
+<h1 id="4Vs">4Vs</h1><p>大数据领域，我们经常会关注的4个V：<br><img src="http://brucenan.qiniudn.com/pm-4v.png" alt="大数据的4V"></p>
+<ol>
+<li>Volume（容量）：海量数据</li>
+<li>Velocity（速度）：数据在不断的变化</li>
+<li>Variety（多样）：数据的多样性，文本，图象，音视频等</li>
+<li>Veracity（真实）：数据的真实性</li>
+</ol>
+<p>数据科学领域，我们会提出以下的4个问题：</p>
+<ol>
+<li>What happened？ 过去发生了什么？</li>
+<li>Why did it happend？为什么会发生？</li>
+<li>What will happen？ 将会发生什么？（做预测Prediction）</li>
+<li>What is the best that can happend？ 如何更好的发生？</li>
+</ol>
+<p>这门课程集中在基于过程process的数据，利用 event data，来改进过程。<br><img src="http://brucenan.qiniudn.com/pm-focus.png" alt="课程集中的领域"></p>
+<h1 id="Different_types_of_process_mining">Different types of process mining</h1><p>Process Mining集中在关注performance-oriented problems和compliance-oriented problems。</p>
+<p>Event data 是 process mining 的入口，什么是 event data 呢？<br>一系列的日志信息，均可以称为 event data，比如学生的所有成绩单、订单的记录、病人治疗的日志等。</p>
+<p>在 Process Mining 中，我们需要关注的是process models 与 event data 之间的关系。如下图所示：<br><img src="http://brucenan.qiniudn.com/pm-ppp.png" alt="Process Mining 的类型"></p>
+<ol>
+<li>Play Out：从已知的process模型中生成 event data</li>
+<li>Play-In：根据 event data 发现 process模型，是一个discovery的过程。</li>
+<li>Replay：已知 model 和 event data，二者互相验证，发现 event data 和 model 的问题</li>
+</ol>
+<p>Replay 可以带上 timestamp，即 event data 的数据会带有时间戳，可以知道每个步骤的耗时。Replay 可以用来做performance analysis，发现过程中哪里是瓶颈。</p>
+<p>下图是对整个 process mining 的概要描述<br><img src="http://brucenan.qiniudn.com/pm-overview.png" alt="Overview"></p>
+<ul>
+<li><strong>World</strong> （真实世界），即事件真实发生的存在；</li>
+<li><strong>Software System</strong>（软件系统），负责记录事件发生，并生成 event logs</li>
+<li><strong>Event logs</strong>（日志），可以用来发现process models</li>
+<li><strong>Model</strong>（模型），eventlogs 可以与 model 做一致性的验证，改进 model</li>
+</ul>
+<p>从这几部分中，我们可以再次总结一下 process mining 的三种类型：<br>Play-Out在图中说明 process model在不利用 eventlog 的情况下，在真实世界和软件系统中的应用。<br>Play-In 负责利用eventlog来发现 process model<br>Replay 主要体现在 conformance 和 enhancement</p>
+<h1 id="Process_Mining与Data_Mining">Process Mining与Data Mining</h1><p>Process Mining之前说过，它集中解决 compliance 和 perfermance 相关的问题，在数据领域，它更像是胶水，把很多方面都粘合在一起，如：</p>
+<ul>
+<li>Data 与 Process</li>
+<li>Business 与 IT</li>
+<li>Busienss Intelligence 与Business Process Management</li>
+<li>Performance 与 Compliance</li>
+<li>Runtime 与 Design Time</li>
+</ul>
+<p>Process Mining 与 BPM 和 data mining 的关系如下：<br><img src="http://brucenan.qiniudn.com/pm-position.png" alt="Process Mining所处位置"><br>特别提到了与 BI 的关系，并举了例子，介绍了 BI 只是将数据以不同的形式展现，而数据背后的深层的涵义，BI 则无法处理了。</p>
+<p>Process Discovery（过程模型的发现），与语言的学习类似，在不断的语言环境下学习新的语言在各种情况下的使用，最终学会语言（掌握了过程的模型）。</p>
+<p>Data Mining 是 data-centre，而不是 process-centre 的。</p>
+<p>课中举了几个数据集的例子，如学生的成绩记录，咖啡店顾客的消费记录等。</p>
+<ul>
+<li>数据集由 <strong>instances（实例）</strong>组成（individuals, entities,cases, objects, or records）,通常指每行数据;</li>
+<li><strong>Variables（变量）</strong>是指数据的各属性，通常以列的形式存在。变量一般有两种类型：<ol>
+<li><strong>categorical variables</strong>：ordinal（序数的）和 nominal（名词性的）特征属性，如 high-med-low，true-false，red-pink-green 等</li>
+<li><strong>numerical variables</strong>：以数字形式存在的变量值</li>
+</ol>
+</li>
+</ul>
+<p>数据挖掘技术一般有两类，<strong>supervised learning（有监督学习）</strong>和 <strong>unsupervised learning（无监督学习）</strong>：</p>
+<p>有监督学习下，存在着labeled data，即 instance 中有专门的<strong>response variable</strong>用来标注整个 instance，它的目标是按照<strong>predictor variables</strong>（dependent variable）来解析response variable（independent variables）。</p>
+<p>对于有监督学习，一般采用classification（如决策树） 和regression 的技术：</p>
+<ul>
+<li>Classification 主要针对categorical response variable，目标是根据predictor variables 把 instance 进行分类；</li>
+<li>Regression 针对的则是 numerical response variable，目标是找出一个符合数据的函数，并使误差减到最小。</li>
+</ul>
+<p>而无监督学习，则是没是 labeled data 的，即 instance 中并没有 response variable和 predictor variables 的区分。针对无监督学习的典型技术有：</p>
+<ul>
+<li>clustering（聚类），如 k-mean clusters</li>
+<li>pattern discovery，如association rules （关联规则）</li>
+</ul>
+<h1 id="Decision_Tree">Decision Tree</h1><p>在决策树方法中，有多个 predictor variables，并且有一个 response variable，我们会根据多个 predictor variables 来预测一个 response variable 的值。比如下面的例子，以死亡人是否饮酒、抽烟、体重作为 predictor 变量，年龄做为 response 变量，来进行的分析：<br><img src="http://brucenan.qiniudn.com/pm-dtexample.png" alt="Decision Tree 的例子"></p>
+<p>注意叶子结点上的数字，左边的数字表明符合该路径的instance 数量，右边表示不符合决策树的 instance 数。</p>
+<p>决策树的基础原理，就是把 instance 的数据集拆分成更小的子集，从一个很大的不确定性的状态（high entropy），划分成确定性逐渐增大的子集，这样的过程就是构建决策树的过程。<br><img src="http://brucenan.qiniudn.com/pm-dtstep.png" alt="Decision Tree 的 构建过程"></p>
+<h2 id="熵">熵</h2><p>所以，理解决策树，就要充分了解<strong>entropy（熵）</strong>。熵是一种degree of uncertainty，一种对不确定性的度量。计算决策树叶子结点的熵值，并不断的降低熵值，就是一个不断改进预测的过程。<br><img src="http://brucenan.qiniudn.com/pm-entropy.png" alt="熵的计算"></p>
+<p>举个例子，有六个病人的数据，在没有进行决策树划分的时候，作为一个整体，计算它的熵值：<br>E=-（3/6<em>log2(3/6)+3/6</em>log2(3/6)） = 1<br>在划分为是否抽烟的两个子结点后，每个子结点的计算：<br>会得出 E1=0，E2=0.811</p>
+<p>对于一棵树的多个子结点，我们采用加权平均的方式，把每个子结点的熵值与它的比重相乘，求和计算出整个决策树的熵值。<br><img src="http://brucenan.qiniudn.com/pm-gainentropy.png" alt="Information gain"></p>
+<p>在决策树的改进过程中，我们可以发现整个树的熵值是在不断变小，每次改进都获得更多的信息（information gain）值。即熵值越小，信息的获取就越多。</p>
+<h2 id="决策树生成算法">决策树生成算法</h2><p>下面是生成决策树的一个简单算法描述：</p>
+<ol>
+<li>首先从根结点开始，包括所有的数据；</li>
+<li>迭代的遍历所有的结点，查看是否在 information gain；</li>
+<li>对于每个结点以及它的每一个属性，都计算如果按照该属性分拆结点后的信息获取情况；</li>
+<li>选择那个获取信息最多的属性作为开端；</li>
+<li>继续之前的操作，直到信息获取不在再明显的改善；</li>
+<li><p>返回一个决策树；</p>
+<p>在决策树的算法中，有许多参数（变量）可以调定，比如：</p>
+<ol>
+<li>minimal size of a node：定义结点在分拆前后的最小数量，以避免 overfitting</li>
+<li>threshold setting the minimal gain：信息增量的最小值，比小于该值，则不再拆分结点</li>
+<li>Maximal depth of the tree：树的最大深度</li>
+<li>Allowing the same label to appear multiple times or not: 是否可重复使用同一 label</li>
+<li>Alternatives to entropy：采用不同的熵值计算</li>
+<li>Splitting the domain of a numerical variable: 将数值型的变量拆分归类</li>
+<li>Post pruning：剪枝，剪去不重要的树分支</li>
+</ol>
+</li>
+</ol>
+<h2 id="决策树的质量">决策树的质量</h2><p>如果判定决策树的质量如何？使用 Confusion Matrix</p>
+<p>防止决策树 overfitting 和 underfitting，我们需要寻找到一种介于两者间的平衡状态。</p>
+<h1 id="Association_Rule">Association Rule</h1><p>assocaition rule 是一种无监督的算法，不存在所谓的 labeled data。经典的啤酒与尿布的故事，就是关联规则算法的一个应用。<br>例如：{beer}-&gt;{diapers}</p>
+<p>所以关联规则的形式就是 X-&gt;Y (x implies y),x与 y 都是数据集中的项</p>
+<h2 id="三个度量的指标：">三个度量的指标：</h2><ol>
+<li><p>Support（支持度）:<br><img src="http://brucenan.qiniudn.com/pm-support.png" alt="Support指标"><br>support 的值范围在0到1之间，0最差，1最佳。</p>
+</li>
+<li><p>Confidence（置信度）：<br><img src="http://brucenan.qiniudn.com/pm-confidence.png" alt="Confidence 指标"><br>support 的值范围在0到1之间，0最差，1最佳。</p>
+</li>
+<li><p>Lift（提升度）：<br><img src="http://brucenan.qiniudn.com/pm-lift.png" alt="Lift 指标"></p>
+</li>
+</ol>
+<p>如果lift&gt;1,则 x 与 y 是正相关<br>如果 lift=1，则x 与 y是独立的<br>如果 lift&lt;1,则 x 与 y 是负相关</p>
+<p>对于关联规则，一个好的关联规则表现在：</p>
+<ol>
+<li>support 尽可能高</li>
+<li>confidence接近1</li>
+<li>lift 大于1</li>
+</ol>
+<h2 id="Bruce_force_approach">Bruce force approach</h2><p>其它类型的 pattern mining<br>sequence mining<br>episode mining</p>
+<h1 id="Cluster_Analysis">Cluster Analysis</h1><p>cluster analysis 也是一种 unsupervised learning techniques</p>
+<h1 id="Evaluating_Mining_Results">Evaluating Mining Results</h1>]]></content>
+    <summary type="html">
+    <![CDATA[<p>课程名称是 《Process Mining： Data Science in Action》，以下是课后笔记整理。</p>
+<h1 id="Date_Science_and_Big_Data">Date Science and Big Data</h1><p>当今的时代，海量数据不断地产生，在过去的10分钟产生的数据量，都超过了2003年之前人类历史上产生的所有数据。人类的各种活动，都会不断地产生一系列的event data（事件数据）。人类的事件数据形成了一个网，即Internet of Events。它的数据主要有4种来源：<br>]]>
+    
+    </summary>
+    
+      <category term="大数据" scheme="http://brucenan.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+      <category term="过程挖掘" scheme="http://brucenan.github.io/tags/%E8%BF%87%E7%A8%8B%E6%8C%96%E6%8E%98/"/>
+    
+      <category term="过程挖掘" scheme="http://brucenan.github.io/categories/%E8%BF%87%E7%A8%8B%E6%8C%96%E6%8E%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[数据仓库的设计（二）]]></title>
+    <link href="http://brucenan.github.io/2014/11/08/dw-02/"/>
+    <id>http://brucenan.github.io/2014/11/08/dw-02/</id>
+    <published>2014-11-08T15:03:59.000Z</published>
+    <updated>2015-12-03T02:38:40.000Z</updated>
+    <content type="html"><![CDATA[<p>书中以不同行业为背景，举了不同的例子来说明数据仓库设计中的各种问题。而且强烈建议读者把所有的内容都阅读一遍，无论是不是你感兴趣的行业。因为行业只是背景，在不同行业背景里的数据仓库，用到了不同的设计方法，只有全部阅读一遍，才能全面了解数据仓库的设计。</p>
+<p>这一章，是零售行业的背景。</p>
+<h1 id="维度设计的过程">维度设计的过程</h1><p>开始数据仓库的维度设计，需要进行以下四个步骤：<br><a id="more"></a></p>
+<ol>
+<li>选择业务过程：样例中管理层想要了解POS系统中顾客的购买情况，因此业务过程就是POS零售交易，它的数据可以使得业务人员分析在哪天哪个卖场的哪个商品在哪种促销情况下售出。</li>
+<li>定义粒度：样例中就是粒度定义为POS上发生的第一笔交易，这样可以最大程度的从不同角度进行数据的分析。</li>
+<li>识别维度：日期、商品、卖场、促销、出纳员、支付方式等都是该系统的维度</li>
+<li>识别事实：销售数量、单价、折扣等</li>
+</ol>
+<p><img src="http://brucenan.qiniudn.com/retailsalesschema.png" alt="零售模型"></p>
+<h1 id="事实表的设计">事实表的设计</h1><h2 id="衍生事实（Derived_Fact）">衍生事实（Derived Fact）</h2><p>可由其它事实数据计算得出的数据，称为<strong>衍生事实</strong>。如事实表中有收入数据与成本数据，那么可以依据收入-成本，就可以计算出利润的数值。</p>
+<p>这种数据可以在事实表中增加一列，直接计算出结果存储下来，或者在后面用到的时候再临时计算得出。书中给出的建议是直接计算出结果，物理存储下来。这样的好处是减少错误的可能性，虽然只是增加了一点存储的容量。</p>
+<h2 id="数值型度量数据的三种类型">数值型度量数据的三种类型</h2><p>事实表中，数值型的度量值一般分为三种类型：<br>全加型(Additive)：在任何维度条件下，数据都是有实际意义的可加性的。<br>半加型(Semi-Additive)：在部分维度条件下，数据可加；<br>非加型(Non-Additive)：在任何维度条件下，数据都是不可加的。如利润率、单价、温度等，不同的值之间相加是没有意义的。</p>
+<h1 id="维度表的设计">维度表的设计</h1><h2 id="日期维度的设计">日期维度的设计</h2><p>日期维度是数据仓库中特殊的维度，几乎所有的数据仓库都有日期的维度，其中每一列都是一个日期的各种属性。而且，不像其它的维度表，日期维度一般是预先建好的。一般会在表中存放10~20年的数据。</p>
+<p><img src="http://brucenan.qiniudn.com/date_dimensional_table.png" alt="日期维度表"></p>
+<p>为什么要有一张这样的日期维度表？有的人可能会问，直接用一个日期列不就可以表示了么？为什么还要再去join另一张日期维度表，增加负担呢？<br>书中的解析有两个原因：</p>
+<ol>
+<li>日期表的join是十分高效的，这种join基本可以忽略；</li>
+<li>SQL的日期功能不是很强，将一些固定的值事先存放在表中，在使用的时候可以直接利用，而且这种日期的逻辑在维度表中就可以解决掉，不用再到应用层的代码里再进行处理了。</li>
+</ol>
+<p>需要注意一点，上面图中的日期维度表的主键最好直接用年月日拼出的整数，而不要用自增列，否则在事实表中查看时，无法直接看出是哪个日期。</p>
+<h3 id="用文本代替Flag类型属性">用文本代替Flag类型属性</h3><p>日期维度表中，可能存在是否为周末的属性，这种属性一般都是用Y或N，0或1之类来区分。这种值可以减少存储量，但难以阅读。所以，为了方便用户理解，而且免去应用层再用代码去处理，最好直接用文本来代替，如“周末”，“非周末”。</p>
+<h3 id="当天与相对日期的属性">当天与相对日期的属性</h3><p>日期属性一般不会更新，但有的时候，我们可能需要一些随时间变化的属性，如IsCurrentDay,IsCurrentMonth,IsPrior60Days等。IsCurrentDay属性每天都需要进行更新，用来生成今天的报表。</p>
+<p>有的日期维度表包括一个日期间隔的属性(lag attribute)，lag列当天为0，昨天是-1，明天是+1。Lag 列可以做为一个计算列，而不是物理列。</p>
+<h3 id="时间维度">时间维度</h3><p>如果日期的维度过大，需要考虑到小时，分钟，甚至秒级的时候，需要一个维度来统计。如果将秒级的数据都放入日期维度，会造成数据量爆增。如果需要进行上钻操作，可以另设一个时间维度，精确到秒级，也就24 <em> 60 </em> 60=1440行数据。如果不需要上钻操作，则可以直接在 fact 表中保存时间。</p>
+<h2 id="产品维度">产品维度</h2><p>产品有很多的描述型属性，有些属性可以按层级分组，如多个产品属于一个品牌，多个品牌属于一个分类，多个分类属于一个部分等。产品维度表可以允许有数据冗余，保存大量的重复数据。有产品有一些高重复的属性值时，可以将他们重复的记录在维度表中，不需要完全按范式要求拆成多张表。</p>
+<p><img src="http://brucenan.qiniudn.com/productdimension.png" alt="产品维度样例"></p>
+<h3 id="数值作维度还是事实">数值作维度还是事实</h3><p>有一些数值型的值，作为维度还是事实不是太清楚。典型的例子就是产品的单价。一般来说，如果：</p>
+<ul>
+<li>数值作为计算使用，则存在事实表中</li>
+<li>数值作为过滤或分组，则可以作为维度表中的一个属性</li>
+</ul>
+<p>如果该数值同时要进行使用和分组使用，则应事实和维度表中都存放。</p>
+<h3 id="维度属性的下钻（Drill_Down）">维度属性的下钻（Drill Down）</h3><p>Drill down 是指从维度表中增加维度，把现有的数据按增加的维度进行细分。  上钻（Drilling up）是指除去维度，并将该维度的数据合并。</p>
+<p>如下图所示，按照 brand name 下钻：<br><img src="http://brucenan.qiniudn.com/drilldown.png" alt="下钻"></p>
+<h2 id="商店维度">商店维度</h2><p>商店维度表中，包括了地理的位置信息，每个商店属于一个地点。我们可以上钻到任何一层的位置，如县，市，州等。因为美国有很多名字相同的城市，所以在维度表中，使用了一个city-state的组合属性。</p>
+<h2 id="促销维度">促销维度</h2><p>促销维度描述了产品以何种形式进行促销的活动，包括降价、优惠券等。这个维度通常称为causal diemension。</p>
+<p><img src="http://brucenan.qiniudn.com/promotion.png" alt="促销维度"></p>
+<h3 id="Null外键">Null外键</h3><p>有的产品没有促销的活动，那如何与促销维度表进行关联？一般是在促销维度表中有一条主键为0或-1的记录，用来标注无促销的产品销售记录。这样，就可以保证产品销售fact表中没有null值的存在。</p>
+<h2 id="退化维度">退化维度</h2><p>Degenrate diemension是指在业务系统中的旧主键，在转到数据仓库后，并没有相对应的维度表进行绑定，已经退化，但建议对其进行保留。因为利用该维度，还是可以对原始的事务进行还原。</p>
+<h1 id="无事实（factless）的事实表">无事实（factless）的事实表</h1><p>对于没有度量值的事实表，我们称之为无事实的事实表，一般通过利用count，distinct等统计记录个数的方式，得出所需的度量指标。</p>
+<h1 id="维度表与事实表的键">维度表与事实表的键</h1><h2 id="维度表的代理键（surrogate_key）">维度表的代理键（surrogate key）</h2><p>业务系统中表的主键，一般称为自然键natural key。维度表的主键一般不使用自然键，而是使用无意义的数字作为主键。维度表中记录的主键，称为代理键（Surrogate Key）。一般从1开始，2，3这样顺序排下去，它没有实际的意义，主要是用来与事实表进行联接。</p>
+<h2 id="维度表的Natural_and_Durable_Supernatural_Keys">维度表的Natural and Durable Supernatural Keys</h2><p>超自然键</p>
+<h2 id="退化维度代理键">退化维度代理键</h2><h2 id="日期维度">日期维度</h2><p>日期维度代理键一般使用yyyymmdd格式的整形数字    </p>
+<h2 id="事件表的代理键">事件表的代理键</h2><p>事件表的代理键，是由整形数构成，并无实际的意义。一般只用于ETL操作。</p>
+<h1 id="抵御一些诱惑">抵御一些诱惑</h1><h2 id="维度表的规范化（雪花模型）">维度表的规范化（雪花模型）</h2><p>雪花模型符合3NF范式，但带来的性能提升却不如普通维度表的易用与高性能的特点。</p>
+<p>##维度使用过多<br>过多的维度表，会导致事实表过多地连接维度表，对于可用性和查询性能来说，都是一个大问题。</p>
+<p>如果维度过多，就要考虑将相关维度组合成单个维度。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>书中以不同行业为背景，举了不同的例子来说明数据仓库设计中的各种问题。而且强烈建议读者把所有的内容都阅读一遍，无论是不是你感兴趣的行业。因为行业只是背景，在不同行业背景里的数据仓库，用到了不同的设计方法，只有全部阅读一遍，才能全面了解数据仓库的设计。</p>
+<p>这一章，是零售行业的背景。</p>
+<h1 id="维度设计的过程">维度设计的过程</h1><p>开始数据仓库的维度设计，需要进行以下四个步骤：<br>]]>
+    
+    </summary>
+    
+      <category term="Additive" scheme="http://brucenan.github.io/tags/Additive/"/>
+    
+      <category term="Derived Fact" scheme="http://brucenan.github.io/tags/Derived-Fact/"/>
+    
+      <category term="数据仓库" scheme="http://brucenan.github.io/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/"/>
+    
+      <category term="数据仓库" scheme="http://brucenan.github.io/categories/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[数据仓库的设计（一）]]></title>
+    <link href="http://brucenan.github.io/2014/11/07/dw-01/"/>
+    <id>http://brucenan.github.io/2014/11/07/dw-01/</id>
+    <published>2014-11-06T16:00:00.000Z</published>
+    <updated>2015-12-03T02:38:40.000Z</updated>
+    <content type="html"><![CDATA[<p>该系列文章是阅读Kimball的《The Data Warehouse Toolkit 3rd Edition》的笔记，做了一个整理。</p>
+<p>Kimball的这本大作，是数据仓库领域的经典。从书中可以学习到很多关于数据仓库设计的道与术。虽然现在都在往大数据NoSQL方向挤，但NoSQL也是Not only SQL,可见，SQL所代表的关系型数据库，依然是整个数据世界的基石，而数据仓库的相关技术，也可以为我们进行大数据的结构设计时提供参考。<br><a id="more"></a><br>本书主要围绕着星型模型（Star Schema）的设计，结合各领域的实际应用，讨论了维度表(Dimensional Table)与事实表(Fact Table)的设计方法。</p>
+<h1 id="事实表">事实表</h1><p>事实表是用来度量的。<br>事实表里存储的是业务处理的记录和需要进行度量的结果。事实表中的每一条记录都代表着一个度量（measurement）的事件。<br>事实表一般会有两个以上的外键，这些外键做为其它维度表的主键。</p>
+<h1 id="维度表">维度表</h1><p>维度表用来描述内容（Descriptive Context），它用来说明事实表中度量值的各个维度的属性。<br>数据仓库的设计，很大程度上取决于维度及其属性的设计。</p>
+<p>维度表与事实表组合在一起，形成了星型模型，如下图：<br><img src="http://brucenan.qiniudn.com/starmodel.png" alt="星型模型"></p>
+<p>对其进行查询操作的SQL语句如下：</p>
+<pre><code>SELECT
+    store<span class="class">.district_name</span>,
+    product<span class="class">.brand</span>,
+    <span class="function"><span class="title">sum</span><span class="params">(sales_facts.sales_dollars)</span></span> AS <span class="string">"Sales Dollars"</span>
+FROM store,
+    product, 
+    date, 
+    sales_facts
+WHERE
+    date.month_name=<span class="string">"January"</span> AND
+    date.year=<span class="number">2013</span> AND
+    store<span class="class">.store_key</span> = sales_facts<span class="class">.store_key</span> AND 
+    product<span class="class">.product_key</span> = sales_facts<span class="class">.product_key</span> AND 
+    date<span class="class">.date_key</span> = sales_facts<span class="class">.date_key</span>
+GROUP BY 
+    store<span class="class">.district_name</span>, 
+    product.brand
+</code></pre><p>上面语句中，FROM的是相关维度表与事实表，WHERE的条件是各维度的属性过滤条件以及事实表与维度表的绑定，GROUPBY是想要统计的维度属性，最终sum出事实表中的度量值。</p>
+<h1 id="Kimball的DW/BI架构">Kimball的DW/BI架构</h1><p>Kimball提出的DW/BI架构，由四部分组成，大类上分为Back room和Front room。详见下图：<br><img src="http://brucenan.qiniudn.com/dwbi.png" alt="DW/BI架构图"></p>
+<h2 id="业务源系统(Opertional_source_system)">业务源系统(Opertional source system)</h2><p>这里指业务系统，它其实是在数据仓库之外的业务系统，比如企业的销售系统、客户管理系统等。这些系统的数据结构都由系统本身来决定，我们不能对其进行修改，只能将数据照搬过来。</p>
+<h2 id="ETL系统(Extract,_Transformation,_and_Load_System)">ETL系统(Extract, Transformation, and Load System)</h2><p>Extract即抽取，是将业务系统的数据抽取到ETL系统中来；<br>Transformation是转换，从各系统进来的数据千奇百怪，我们需要对数据进行各种清洗、组合、去重等操作；<br>Load是将转换后的数据加载进目标的维度模型，即更新维度表和事实表。</p>
+<h2 id="展现区域(Presentation_Area)">展现区域(Presentation Area)</h2><p>DW/BI的展现区域，是数据经过组织后所存储的地方，它可以直接供用户进行查询操作。</p>
+<h2 id="BI应用(BI_Application)">BI应用(BI Application)</h2><p>BI应用通过上面的展现区域查询数据，同时它又可需要支持即席查询（ad hoc）甚至提供数据挖掘或建模的功能。</p>
+<h2 id="一个餐馆的隐喻">一个餐馆的隐喻</h2><p>Kimball将DW/BI架构比喻成了一个餐馆，ETL系统就是厨房，他们将来自外部的采购进行各种加工处理，而展现区域和BI应用就是餐馆的大堂，厨房做好的菜都将来到大堂，展现到每位顾客的面前，而顾客们也是在大堂里吃到食物、接受到餐饮的服务等。</p>
+<h1 id="其它的DW/BI架构介绍">其它的DW/BI架构介绍</h1><h2 id="独立数据集市架构">独立数据集市架构</h2><p>独立数据集市的架构(Independent Data Mart Architecture)，这种一般在企业的各个部门间会出现。某个部门需要进行数据分析的工作，于是就从业务系统中进行ETL操作，建立了一个仅供部门自己使用的数据集市。如果同时还有别的部门也有同样的想法，那么情况就会如下图所示：<br><img src="http://brucenan.qiniudn.com/indepentantdatamart.png" alt="独立数据集市架构"><br>由于业务规则和处理方式的不统一，结果会造成各部门的报表上的数据对不上。Kimball也不建议使用这种方式。</p>
+<h2 id="CIF架构">CIF架构</h2><p>Hub-and-Spoke Corporate Information Factory Inmon Architecture，它是由另一位数据仓库教父Inmon提出的。他提出在企业层面上建立起一个企业数据仓库(EDW)。<br><img src="http://brucenan.qiniudn.com/cif.png" alt="CIF架构"><br>与Kimball不同的是，Inmon要求EDW的数据是符合3NF规范化的，而Kimball则提出了遵照维度设计的企业总线(Enterprise Bus)的形式，维度的设计却是去规范化的，里面经常有大量的数据冗余。</p>
+<h2 id="超越的架构">超越的架构</h2><p>这种架构是将Inmon和Kimball的架构进行了结合，采用了Inmon的EDW概念，但同时去除了DM，而是将Kimball的维度模型OLAP加了进来。<br><img src="http://brucenan.qiniudn.com/hybrid.png" alt="Hybrid架构"><br>不过Kimball仍在书中讽刺地写道，这种架构会花费更多的时间和金钱，如果你真的不差钱，那么还是可以去做的：）</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>该系列文章是阅读Kimball的《The Data Warehouse Toolkit 3rd Edition》的笔记，做了一个整理。</p>
+<p>Kimball的这本大作，是数据仓库领域的经典。从书中可以学习到很多关于数据仓库设计的道与术。虽然现在都在往大数据NoSQL方向挤，但NoSQL也是Not only SQL,可见，SQL所代表的关系型数据库，依然是整个数据世界的基石，而数据仓库的相关技术，也可以为我们进行大数据的结构设计时提供参考。<br>]]>
+    
+    </summary>
+    
+      <category term="DM" scheme="http://brucenan.github.io/tags/DM/"/>
+    
+      <category term="EDW" scheme="http://brucenan.github.io/tags/EDW/"/>
+    
+      <category term="事实表" scheme="http://brucenan.github.io/tags/%E4%BA%8B%E5%AE%9E%E8%A1%A8/"/>
+    
+      <category term="数据仓库" scheme="http://brucenan.github.io/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/"/>
+    
+      <category term="维度表" scheme="http://brucenan.github.io/tags/%E7%BB%B4%E5%BA%A6%E8%A1%A8/"/>
+    
+      <category term="数据仓库" scheme="http://brucenan.github.io/categories/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <link href="http://brucenan.github.io/2014/11/04/hello-world/"/>
+    <id>http://brucenan.github.io/2014/11/04/hello-world/</id>
+    <published>2014-11-04T14:45:39.000Z</published>
+    <updated>2015-12-03T02:38:40.000Z</updated>
+    <content type="html"><![CDATA[<p>你好，Github的世界！</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>你好，Github的世界！</p>
+]]>
+    </summary>
+    
+  </entry>
+  
+</feed>
