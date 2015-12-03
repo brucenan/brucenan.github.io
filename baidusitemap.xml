@@ -1,49 +1,182 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
-  <url>
-    <loc>http://brucenan.github.io/baidu_verify_FyNHqn361l.html</loc>
-    <lastmod>2015-12-03T03:40:04.000Z</lastmod>
-  </url>
-  
+
+
+    
   <url>
     <loc>http://brucenan.github.io/2014/11/07/dw-01/</loc>
     <lastmod>2015-12-03T02:38:40.000Z</lastmod>
-  </url>
-  
+    <data>
+        <display>
+        <title>数据仓库的设计（一）</title>
+        <pubTime>2014-11-06T16:00:00.000Z</pubTime>
+        
+        <tag>DM</tag>
+         
+        <tag>EDW</tag>
+         
+        <tag>事实表</tag>
+         
+        <tag>数据仓库</tag>
+         
+        <tag>维度表</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据仓库" url="http://brucenan.github.io/categories/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
   <url>
     <loc>http://brucenan.github.io/2015/01/13/r2/</loc>
     <lastmod>2015-12-03T02:38:40.000Z</lastmod>
-  </url>
-  
+    <data>
+        <display>
+        <title>R Programming笔记（二）</title>
+        <pubTime>2015-01-13T02:59:53.000Z</pubTime>
+        
+        <tag>R</tag>
+         
+        <tag>数据分析</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据分析" url="http://brucenan.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
   <url>
     <loc>http://brucenan.github.io/2015/01/12/r1/</loc>
     <lastmod>2015-12-03T02:38:40.000Z</lastmod>
-  </url>
-  
+    <data>
+        <display>
+        <title>R Programming笔记（一）</title>
+        <pubTime>2015-01-12T02:58:31.000Z</pubTime>
+        
+        <tag>R</tag>
+         
+        <tag>数据分析</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据分析" url="http://brucenan.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
   <url>
     <loc>http://brucenan.github.io/2015/01/02/process2/</loc>
     <lastmod>2015-12-03T02:38:40.000Z</lastmod>
-  </url>
-  
+    <data>
+        <display>
+        <title>Process Mining学习笔记（二）</title>
+        <pubTime>2015-01-02T02:02:25.000Z</pubTime>
+        
+        <tag>过程挖掘</tag>
+         
+         
+           
+             
+              <breadCrumb title="过程挖掘" url="http://brucenan.github.io/categories/%E8%BF%87%E7%A8%8B%E6%8C%96%E6%8E%98/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
   <url>
     <loc>http://brucenan.github.io/2014/12/25/process1/</loc>
     <lastmod>2015-12-03T02:38:40.000Z</lastmod>
-  </url>
-  
+    <data>
+        <display>
+        <title>Process Mining学习笔记（一）</title>
+        <pubTime>2014-12-25T15:10:04.000Z</pubTime>
+        
+        <tag>大数据</tag>
+         
+        <tag>过程挖掘</tag>
+         
+         
+           
+             
+              <breadCrumb title="过程挖掘" url="http://brucenan.github.io/categories/%E8%BF%87%E7%A8%8B%E6%8C%96%E6%8E%98/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
   <url>
     <loc>http://brucenan.github.io/2014/11/04/hello-world/</loc>
     <lastmod>2015-12-03T02:38:40.000Z</lastmod>
-  </url>
-  
+    <data>
+        <display>
+        <title>Hello World</title>
+        <pubTime>2014-11-04T14:45:39.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
   <url>
     <loc>http://brucenan.github.io/2015/06/15/dw-03/</loc>
     <lastmod>2015-12-03T02:38:40.000Z</lastmod>
-  </url>
-  
+    <data>
+        <display>
+        <title>数据仓库的设计（三）</title>
+        <pubTime>2015-06-15T12:58:52.000Z</pubTime>
+        
+        <tag>Additive</tag>
+         
+        <tag>Derived Fact</tag>
+         
+        <tag>数据仓库</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据仓库" url="http://brucenan.github.io/categories/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
   <url>
     <loc>http://brucenan.github.io/2014/11/08/dw-02/</loc>
     <lastmod>2015-12-03T02:38:40.000Z</lastmod>
-  </url>
-  
+    <data>
+        <display>
+        <title>数据仓库的设计（二）</title>
+        <pubTime>2014-11-08T15:03:59.000Z</pubTime>
+        
+        <tag>Additive</tag>
+         
+        <tag>Derived Fact</tag>
+         
+        <tag>数据仓库</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据仓库" url="http://brucenan.github.io/categories/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/"/>
+          
+        </display>
+    </data>
+    </url>
+
 </urlset>
